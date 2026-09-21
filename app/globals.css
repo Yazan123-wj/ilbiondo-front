@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f3efe8;
+  --foreground: #161412;
+  --muted: #6a635b;
+  --border: #d8d0c4;
+  --accent: #58101a;
+  --surface: #ebe5db;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-surface: var(--surface);
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-display);
+}
+
+html {
+  scroll-behavior: auto;
+  background: var(--background);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 4px;
+}
+
+[id] {
+  scroll-margin-top: 6.5rem;
+}
+
+.nav-label {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero-loader-mask {
+  background: var(--background);
+  --hole-w: 0px;
+  --hole-h: 0px;
+  -webkit-mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  -webkit-mask-repeat: no-repeat, no-repeat;
+  -webkit-mask-position: 0 0, 50% 50%;
+  -webkit-mask-size: 100% 100%, var(--hole-w) var(--hole-h);
+  -webkit-mask-composite: xor;
+  mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  mask-repeat: no-repeat, no-repeat;
+  mask-position: 0 0, 50% 50%;
+  mask-size: 100% 100%, var(--hole-w) var(--hole-h);
+  mask-composite: exclude;
+}
