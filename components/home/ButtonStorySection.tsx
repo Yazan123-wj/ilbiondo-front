@@ -214,11 +214,11 @@ export function ButtonStorySection() {
           href="/appointments"
           className="mt-8 inline-flex items-center bg-accent px-8 py-3.5 text-[11px] tracking-[0.18em] text-background uppercase transition-opacity hover:opacity-85"
         >
-          Start{" "}
+          Book{" "}
           <em className="mx-1.5 font-serif text-[1.05rem] font-normal normal-case leading-none tracking-normal italic">
             your
           </em>{" "}
-          Commission
+          Appointment
         </Link>
       </div>
     </section>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { forwardRef } from "react";
 
+import { BrandMark } from "@/components/shared/BrandMark";
 import { cn } from "@/lib/utils";
 
 export function clipWordmarkToMedia(logo: HTMLElement, media: HTMLElement) {
@@ -48,18 +49,15 @@ export const DualToneWordmark = forwardRef<
     <Link
       ref={ref}
       href="/"
-      className={cn(
-        "relative inline-block whitespace-nowrap font-serif leading-none uppercase",
-        className,
-      )}
+      className={cn("relative inline-block text-accent", className)}
     >
-      <span className="text-accent">IL BIONDO</span>
+      <BrandMark />
       <span
         data-logo-on-media
         className="absolute inset-0 text-white"
         aria-hidden
       >
-        IL BIONDO
+        <BrandMark />
       </span>
     </Link>
   );

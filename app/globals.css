@@ -16,8 +16,8 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-surface: var(--surface);
-  --font-sans: var(--font-geist-sans);
-  --font-serif: var(--font-display);
+  --font-sans: var(--font-satoshi), "Satoshi", sans-serif;
+  --font-serif: Georgia, "Times New Roman", Times, serif;
 }
 
 html {
@@ -28,8 +28,17 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Helvetica, Arial, sans-serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   color-scheme: light;
+}
+
+@layer base {
+  p:not(.font-serif),
+  input,
+  textarea,
+  select {
+    font-family: var(--font-satoshi), "Satoshi", sans-serif;
+  }
 }
 
 ::selection {
@@ -51,6 +60,7 @@ textarea:focus-visible {
 }
 
 .nav-label {
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;

@@ -35,7 +35,7 @@ export function HomeIntro() {
   const frameRef = useRef<HTMLDivElement>(null);
   const heroLogoRef = useRef<HTMLAnchorElement>(null);
   const navLogoRef = useRef<HTMLAnchorElement>(null);
-  const taglineRef = useRef<HTMLParagraphElement>(null);
+  const taglineRef = useRef<HTMLDivElement>(null);
   const [done, setDone] = useState(false);
   const [navSettled, setNavSettled] = useState(false);
 

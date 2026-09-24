@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { AboutSection } from "@/components/home/AboutSection";
 import { BrandAtelier } from "@/components/home/BrandAtelier";
 import { ButtonStorySection } from "@/components/home/ButtonStorySection";
 import { ExperienceSection } from "@/components/home/ExperienceSection";
@@ -20,6 +21,7 @@ export default function HomePage() {
     <>
       <HomeIntro />
       <ExperienceSection />
+      <AboutSection />
       <PrivateServices />
       <BrandAtelier />
       <FeaturedBrands />

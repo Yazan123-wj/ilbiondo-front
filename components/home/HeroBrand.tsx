@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 
 import { DualToneWordmark } from "@/components/shared/DualToneWordmark";
@@ -7,7 +8,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 
 type HeroBrandProps = {
   logoRef: React.RefObject<HTMLAnchorElement | null>;
-  taglineRef: React.RefObject<HTMLParagraphElement | null>;
+  taglineRef: React.RefObject<HTMLDivElement | null>;
 };
 
 export function HeroBrand({ logoRef, taglineRef }: HeroBrandProps) {
@@ -56,15 +57,21 @@ export function HeroBrand({ logoRef, taglineRef }: HeroBrandProps) {
     >
       <DualToneWordmark
         ref={logoRef}
-        className="pointer-events-auto absolute top-1/2 left-1/2 z-10 text-5xl tracking-[0.2em] md:text-7xl"
+        className="pointer-events-auto absolute top-1/2 left-1/2 z-10 h-32 md:h-44"
       />
-      <div className="absolute top-[calc(50%+2.75rem)] left-1/2 w-max -translate-x-1/2 md:top-[calc(50%+3.85rem)]">
-        <p
-          ref={taglineRef}
-          className="font-serif text-sm tracking-[0.16em] text-white/90 italic md:text-base"
-        >
+      <div
+        ref={taglineRef}
+        className="absolute top-[calc(50%+6.6rem)] left-1/2 flex w-max -translate-x-1/2 flex-col items-center md:top-[calc(50%+8.6rem)]"
+      >
+        <p className="font-serif text-sm tracking-[0.16em] text-white/90 italic md:text-base">
           A considered approach to modern tailoring.
         </p>
+        <Link
+          href="/appointments"
+          className="pointer-events-auto mt-6 inline-flex items-center border border-white/25 bg-white/10 px-8 py-3 text-[11px] tracking-[0.2em] text-white uppercase backdrop-blur-md transition-[background-color,border-color] duration-300 hover:border-white/40 hover:bg-white/20"
+        >
+          Book your Appointment
+        </Link>
       </div>
     </div>
   );

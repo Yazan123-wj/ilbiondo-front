@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Geist } from "next/font/google";
+import localFont from "next/font/local";
 
 import { Footer } from "@/components/layout/Footer";
 import { HashScroll } from "@/components/layout/HashScroll";
@@ -8,16 +8,31 @@ import { PageTransition } from "@/components/layout/PageTransition";
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const display = Cormorant_Garamond({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+const satoshi = localFont({
+  src: [
+    {
+      path: "./fonts/satoshi/satoshi-400.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/satoshi/satoshi-400-italic.woff2",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/satoshi/satoshi-500.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/satoshi/satoshi-700.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-satoshi",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -31,10 +46,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${display.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${satoshi.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <HashScroll />
         <LayoutNav />

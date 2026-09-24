@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { MenuOverlay } from "@/components/layout/MenuOverlay";
+import { BrandMark } from "@/components/shared/BrandMark";
 import { DualToneWordmark } from "@/components/shared/DualToneWordmark";
 import { cn } from "@/lib/utils";
 
@@ -96,16 +97,16 @@ export function SiteNav({
                 <DualToneWordmark
                   ref={logoRef}
                   className={cn(
-                    "relative pointer-events-auto text-sm tracking-[0.16em] md:text-xl md:tracking-[0.18em]",
+                    "relative pointer-events-auto h-9 md:h-11",
                     hideLogoUntilScroll && "opacity-0",
                   )}
                 />
               ) : (
                 <Link
                   href="/"
-                  className="pointer-events-auto font-serif text-sm leading-none tracking-[0.16em] text-accent uppercase md:text-xl md:tracking-[0.18em]"
+                  className="pointer-events-auto h-9 text-accent md:h-11"
                 >
-                  IL BIONDO
+                  <BrandMark />
                 </Link>
               )}
             </div>

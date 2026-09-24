@@ -11,16 +11,21 @@ import { preloadButtonModel } from "@/lib/product";
 function HouseMark({
   name,
   origin,
+  logo,
 }: {
   name: string;
   origin: string;
+  logo: string;
 }) {
   return (
     <div className="flex shrink-0 items-center gap-10 px-8 md:gap-16 md:px-14">
-      <div className="text-center">
-        <p className="font-serif text-[clamp(1.85rem,4vw,3.4rem)] leading-none tracking-[-0.03em]">
-          {name}
-        </p>
+      <div className="flex flex-col items-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={logo}
+          alt={name}
+          className="h-9 w-auto brightness-0 md:h-11"
+        />
         <p className="mt-3 text-[10px] tracking-[0.32em] text-muted uppercase">
           {origin}
         </p>
@@ -125,6 +130,7 @@ export function FeaturedBrands() {
                   key={`a-${house.name}`}
                   name={house.name}
                   origin={house.origin}
+                  logo={house.logo}
                 />
               ))}
             </div>
@@ -134,6 +140,7 @@ export function FeaturedBrands() {
                   key={`b-${house.name}`}
                   name={house.name}
                   origin={house.origin}
+                  logo={house.logo}
                 />
               ))}
             </div>

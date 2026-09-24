@@ -24,7 +24,7 @@ export function PageHero({ eyebrow, title, children, className }: PageHeroProps)
         {title}
       </h1>
       {children ? (
-        <div className="mt-8 max-w-2xl space-y-6 text-base leading-8 text-muted md:text-lg md:leading-9">
+        <div className="mt-8 max-w-2xl space-y-6 font-sans text-base leading-8 text-muted md:text-lg md:leading-9">
           {children}
         </div>
       ) : null}

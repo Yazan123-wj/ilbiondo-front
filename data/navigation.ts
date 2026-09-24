@@ -21,6 +21,18 @@ export const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
+    id: "the-journey",
+    label: "The Journey",
+    items: [
+      { label: "The Appointment", href: "/process#appointment" },
+      { label: "The Measure", href: "/process#measure" },
+      { label: "The Cloth", href: "/process#cloth" },
+      { label: "First Prova", href: "/process#first-prova" },
+      { label: "Second Prova", href: "/process#second-prova" },
+      { label: "The Delivery", href: "/process#delivery" },
+    ],
+  },
+  {
     id: "tailoring",
     label: "Tailoring",
     items: [

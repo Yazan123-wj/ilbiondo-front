@@ -257,7 +257,7 @@ export function ExperienceStory() {
               href="/appointments"
               className="mt-8 inline-flex bg-accent px-7 py-3 text-[11px] tracking-[0.22em] text-background uppercase transition-opacity hover:opacity-85"
             >
-              Start a Commission
+              Book your Appointment
             </Link>
           </div>
         </div>

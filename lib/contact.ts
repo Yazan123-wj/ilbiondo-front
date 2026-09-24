@@ -13,7 +13,8 @@ export const CONTACT = {
   whatsapp: "",
   email: "",
   mapsUrl: "",
-  instagramUrl: "",
+  instagramUrl: "https://www.instagram.com/",
+  facebookUrl: "https://www.facebook.com/",
 } as const;
 
 export const APPOINTMENT_SERVICES = [

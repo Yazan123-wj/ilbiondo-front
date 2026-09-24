@@ -13,6 +13,7 @@ export type ProcessStep = {
 export const PROCESS_STEPS: ProcessStep[] = [
   {
     number: "01",
+    id: "appointment",
     label: "The Appointment",
     title: "It starts with a conversation.",
     paragraphs: [
@@ -26,6 +27,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   },
   {
     number: "02",
+    id: "measure",
     label: "The Measure",
     title: "Built around you.",
     paragraphs: [
@@ -45,6 +47,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   },
   {
     number: "04",
+    id: "first-prova",
     label: "First Prova",
     title: "The first form.",
     paragraphs: [
@@ -54,6 +57,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   },
   {
     number: "05",
+    id: "second-prova",
     label: "Second Prova",
     title: "Refining the details.",
     paragraphs: [
@@ -63,6 +67,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   },
   {
     number: "06",
+    id: "delivery",
     label: "The Delivery",
     title: "Made yours.",
     paragraphs: [
