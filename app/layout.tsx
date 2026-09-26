@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+import { AtelierMusicProvider } from "@/components/layout/AtelierMusic";
 import { Footer } from "@/components/layout/Footer";
 import { HashScroll } from "@/components/layout/HashScroll";
 import { LayoutNav } from "@/components/layout/LayoutNav";
@@ -48,12 +49,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${satoshi.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        <HashScroll />
-        <LayoutNav />
-        <main id="content" className="flex flex-1 flex-col">
-          <PageTransition>{children}</PageTransition>
-        </main>
-        <Footer />
+        <AtelierMusicProvider>
+          <HashScroll />
+          <LayoutNav />
+          <main id="content" className="flex flex-1 flex-col">
+            <PageTransition>{children}</PageTransition>
+          </main>
+          <Footer />
+        </AtelierMusicProvider>
       </body>
     </html>
   );

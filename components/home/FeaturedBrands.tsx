@@ -24,7 +24,7 @@ function HouseMark({
         <img
           src={logo}
           alt={name}
-          className="h-9 w-auto brightness-0 md:h-11"
+          className="h-16 w-auto max-w-[12rem] object-contain object-center md:h-20 md:max-w-[15rem]"
         />
         <p className="mt-3 text-[10px] tracking-[0.32em] text-muted uppercase">
           {origin}
@@ -108,8 +108,9 @@ export function FeaturedBrands() {
           of standing.
         </h2>
         <p className="mx-auto mt-8 max-w-md font-serif text-base leading-8 text-muted italic md:text-[1.05rem] md:leading-9">
-          Loro Piana, Holland &amp; Sherry, and the mills that have dressed
-          the world — chosen in the atelier for the life you lead.
+          Loro Piana, Holland &amp; Sherry, Scabal, and Dormeuil — mills
+          that have dressed the world, chosen in the atelier for the life
+          you lead.
         </p>
       </TextReveal>
 
