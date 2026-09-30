@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ElementType } from "react";
+import { createElement, useRef } from "react";
 
 import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
@@ -24,7 +24,7 @@ export function BlurText({
   animateBy = "words",
   direction = "bottom",
   threshold = 0.16,
-  tag: Tag = "p",
+  tag = "p",
 }: BlurTextProps) {
   const ref = useRef<HTMLElement>(null);
   const units =
@@ -70,25 +70,23 @@ export function BlurText({
     },
   );
 
-  const Component = Tag as ElementType;
+  return createElement(
+    tag,
+    { ref, className: cn(className) },
+    units.map((unit, index) => {
+      if (animateBy === "words" && /^\s+$/.test(unit)) {
+        return <span key={index}>{unit}</span>;
+      }
 
-  return (
-    <Component ref={ref} className={cn(className)}>
-      {units.map((unit, index) => {
-        if (animateBy === "words" && /^\s+$/.test(unit)) {
-          return <span key={index}>{unit}</span>;
-        }
-
-        return (
-          <span
-            key={`${unit}-${index}`}
-            data-blur-word
-            className="inline-block will-change-[transform,filter,opacity]"
-          >
-            {unit === " " ? "\u00A0" : unit}
-          </span>
-        );
-      })}
-    </Component>
+      return (
+        <span
+          key={`${unit}-${index}`}
+          data-blur-word
+          className="inline-block will-change-[transform,filter,opacity]"
+        >
+          {unit === " " ? "\u00A0" : unit}
+        </span>
+      );
+    }),
   );
 }

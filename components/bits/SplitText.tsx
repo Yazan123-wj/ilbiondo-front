@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type CSSProperties, type ElementType } from "react";
+import { createElement, useRef, type CSSProperties } from "react";
 
 import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
@@ -29,7 +29,7 @@ export function SplitText({
   from = { opacity: 0, yPercent: 110 },
   to = { opacity: 1, yPercent: 0 },
   threshold = 0.18,
-  tag: Tag = "p",
+  tag = "p",
   textAlign,
 }: SplitTextProps) {
   const ref = useRef<HTMLElement>(null);
@@ -73,33 +73,31 @@ export function SplitText({
     },
   );
 
-  const Component = Tag as ElementType;
+  return createElement(
+    tag,
+    {
+      ref,
+      className: cn(className),
+      style: { textAlign, lineHeight: 1.12 },
+    },
+    units.map((unit, index) => {
+      if (splitType === "words" && /^\s+$/.test(unit)) {
+        return <span key={index}>{unit}</span>;
+      }
 
-  return (
-    <Component
-      ref={ref}
-      className={cn(className)}
-      style={{ textAlign, lineHeight: 1.12 }}
-    >
-      {units.map((unit, index) => {
-        if (splitType === "words" && /^\s+$/.test(unit)) {
-          return <span key={index}>{unit}</span>;
-        }
-
-        return (
+      return (
+        <span
+          key={`${unit}-${index}`}
+          className="inline-block overflow-hidden pb-[0.28em] align-bottom leading-[1.12]"
+        >
           <span
-            key={`${unit}-${index}`}
-            className="inline-block overflow-hidden pb-[0.28em] align-bottom leading-[1.12]"
+            data-split-inner
+            className="inline-block leading-[1.12] will-change-transform"
           >
-            <span
-              data-split-inner
-              className="inline-block leading-[1.12] will-change-transform"
-            >
-              {unit === " " ? "\u00A0" : unit}
-            </span>
+            {unit === " " ? "\u00A0" : unit}
           </span>
-        );
-      })}
-    </Component>
+        </span>
+      );
+    }),
   );
 }
