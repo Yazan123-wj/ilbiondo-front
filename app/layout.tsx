@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Cormorant_Garamond } from "next/font/google";
 import localFont from "next/font/local";
 
 import { AtelierMusicProvider } from "@/components/layout/AtelierMusic";
@@ -36,6 +37,14 @@ const satoshi = localFont({
   display: "swap",
 });
 
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: {
     default: "IL BIONDO",
@@ -47,7 +56,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${satoshi.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${satoshi.variable} ${cormorant.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <AtelierMusicProvider>
           <HashScroll />
