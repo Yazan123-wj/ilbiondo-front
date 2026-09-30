@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 
-import { ServiceSection } from "@/components/services/ServiceSection";
-import { PageHero } from "@/components/shared/PageHero";
-import { SERVICES } from "@/data/services";
+import { ServicesView } from "@/components/services/ServicesView";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -11,17 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
-  return (
-    <>
-      <PageHero title="At your service">
-        <p>
-          From a single garment to a complete wardrobe, our services are
-          designed around the individual.
-        </p>
-      </PageHero>
-      {SERVICES.map((service, index) => (
-        <ServiceSection key={service.id} index={index} {...service} />
-      ))}
-    </>
-  );
+  return <ServicesView />;
 }

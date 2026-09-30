@@ -9,10 +9,10 @@ export const CONTACT = {
     { days: "Sunday", time: "By Appointment" },
   ],
   // Replace these with live atelier details before launch.
-  phone: "",
-  whatsapp: "",
-  email: "",
-  mapsUrl: "",
+  phone: "" as string,
+  whatsapp: "" as string,
+  email: "" as string,
+  mapsUrl: "" as string,
   instagramUrl: "https://www.instagram.com/",
   facebookUrl: "https://www.facebook.com/",
 } as const;

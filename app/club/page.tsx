@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 
-import { MembershipSection } from "@/components/club/MembershipSection";
-import { PageHero } from "@/components/shared/PageHero";
-import { PrimaryLink } from "@/components/shared/PrimaryLink";
+import { ClubView } from "@/components/club/ClubView";
 
 export const metadata: Metadata = {
   title: {
@@ -13,22 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function ClubPage() {
-  return (
-    <>
-      <PageHero title="The art of belonging">
-        <p>
-          IL BIONDO Club is our private circle — created for clients who see
-          tailoring not simply as clothing, but as part of the way they live.
-        </p>
-        <p>
-          Membership brings you closer to the atelier, with early access,
-          private services and experiences reserved for our members.
-        </p>
-        <PrimaryLink href="#membership" className="mt-10">
-          Join IL BIONDO Club
-        </PrimaryLink>
-      </PageHero>
-      <MembershipSection />
-    </>
-  );
+  return <ClubView />;
 }

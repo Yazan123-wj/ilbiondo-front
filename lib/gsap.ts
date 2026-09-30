@@ -2,6 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 let pluginsRegistered = false;
@@ -11,11 +12,11 @@ export function registerGsapPlugins() {
     return;
   }
 
-  gsap.registerPlugin(ScrollTrigger, useGSAP);
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, useGSAP);
   pluginsRegistered = true;
 }
 
 registerGsapPlugins();
 
-export { gsap, ScrollTrigger, useGSAP };
+export { gsap, ScrollTrigger, ScrollToPlugin, useGSAP };
 export default gsap;

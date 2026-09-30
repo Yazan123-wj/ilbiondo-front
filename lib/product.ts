@@ -1,6 +1,5 @@
-export const PRODUCT_MODEL_PATH = "/models/ilbiondo-product.glb";
 export const BUTTON_MODEL_PATH = "/models/button.glb";
-export const HERO_FABRIC_PATH = "/images/hero-fabric.png";
+export const HERO_FABRIC_PATH = "/images/lifestyle/oxfords.png";
 
 export function preloadButtonModel() {
   if (typeof window === "undefined") {

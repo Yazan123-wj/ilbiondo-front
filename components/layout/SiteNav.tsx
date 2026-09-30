@@ -13,6 +13,7 @@ type SiteNavProps = {
   inverted?: boolean;
   showLogo?: boolean;
   solid?: boolean;
+  filled?: boolean;
   logoRef?: React.RefObject<HTMLAnchorElement | null>;
   forceScrolled?: boolean;
 };
@@ -21,6 +22,7 @@ export function SiteNav({
   inverted = false,
   showLogo = false,
   solid = false,
+  filled = false,
   logoRef,
   forceScrolled,
 }: SiteNavProps) {
@@ -51,21 +53,28 @@ export function SiteNav({
   const scrolled = forceScrolled ?? internalScrolled;
   const light = inverted && !scrolled && !open;
   const pill = solid && !open;
-  const hideLogoUntilScroll = Boolean(logoRef);
+  const hideLogoUntilScroll = logoRef != null;
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+      <header
+        className={cn(
+          "pointer-events-none fixed inset-x-0 top-0 z-50",
+          filled && "bg-background",
+        )}
+      >
         <div className="relative flex items-center justify-between px-4 py-5 md:px-8">
           <button
             type="button"
             className={cn(
               "pointer-events-auto px-3 py-2 text-[11px] tracking-[0.22em] uppercase transition-colors duration-500 md:px-5 md:py-2.5",
-              pill
-                ? "bg-accent text-background"
-                : light
-                  ? "border border-white/40 text-white"
-                  : "border border-foreground/20 text-foreground",
+              open
+                ? "border border-foreground/20 bg-background text-foreground"
+                : pill
+                  ? "bg-accent text-background"
+                  : light
+                    ? "border border-white/40 text-white"
+                    : "border border-foreground/20 text-foreground transition-colors duration-[400ms] hover:border-accent hover:bg-accent hover:text-background",
             )}
             aria-expanded={open}
             aria-controls="site-menu-panel"
@@ -74,21 +83,23 @@ export function SiteNav({
             {open ? "Close" : "Menu"}
           </button>
 
-          <Link
-            href="/contact"
-            className={cn(
-              "pointer-events-auto px-3 py-2 text-[11px] tracking-[0.22em] uppercase transition-colors duration-500 md:px-5 md:py-2.5",
-              pill
-                ? "bg-accent text-background"
-                : light
-                  ? "border border-white/40 text-white"
-                  : "border border-foreground/20 text-foreground",
-            )}
-          >
-            Contact
-          </Link>
+          {open ? null : (
+            <Link
+              href="/contact"
+              className={cn(
+                "pointer-events-auto px-3 py-2 text-[11px] tracking-[0.22em] uppercase transition-colors duration-500 md:px-5 md:py-2.5",
+                pill
+                  ? "bg-accent text-background"
+                  : light
+                    ? "border border-white/40 text-white"
+                    : "border border-foreground/20 text-foreground transition-colors duration-[400ms] hover:border-accent hover:bg-accent hover:text-background",
+              )}
+            >
+              Contact
+            </Link>
+          )}
 
-          {showLogo ? (
+          {showLogo && !open ? (
             <div
               data-nav-logo
               className="pointer-events-none absolute inset-0 flex items-center justify-center"
@@ -104,7 +115,10 @@ export function SiteNav({
               ) : (
                 <Link
                   href="/"
-                  className="pointer-events-auto h-9 text-accent md:h-11"
+                  className={cn(
+                    "pointer-events-auto h-9 md:h-11",
+                    light ? "text-background" : "text-accent",
+                  )}
                 >
                   <BrandMark />
                 </Link>

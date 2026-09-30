@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 
-import { PrivilegeSection } from "@/components/club/PrivilegeSection";
-import { PageHero } from "@/components/shared/PageHero";
-import { CLUB_PRIVILEGES } from "@/data/club";
+import { PrivilegesView } from "@/components/club/PrivilegesView";
 
 export const metadata: Metadata = {
   title: "Club Privileges",
@@ -11,14 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function ClubPrivilegesPage() {
-  return (
-    <>
-      <PageHero title="More than membership.">
-        <p>A closer relationship with the house.</p>
-      </PageHero>
-      {CLUB_PRIVILEGES.map((privilege, index) => (
-        <PrivilegeSection key={privilege.title} index={index} {...privilege} />
-      ))}
-    </>
-  );
+  return <PrivilegesView />;
 }

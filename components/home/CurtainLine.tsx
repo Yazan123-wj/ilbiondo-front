@@ -14,7 +14,7 @@ export function CurtainLine({
   innerClassName,
 }: CurtainLineProps) {
   return (
-    <div className={cn("overflow-hidden", className)}>
+    <div className={cn("overflow-hidden pb-[0.22em]", className)}>
       <div data-curtain-line className={cn("will-change-transform", innerClassName)}>
         {children}
       </div>

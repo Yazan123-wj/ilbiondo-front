@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { PageHero } from "@/components/shared/PageHero";
+import { EditorialHero } from "@/components/editorial/EditorialHero";
+import { editorialGutter } from "@/components/editorial/styles";
 import { CONTACT } from "@/lib/contact";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -45,38 +47,73 @@ const ACTIONS: ContactAction[] = [
 export default function ContactPage() {
   return (
     <>
-      <PageHero title="At your service.">
-        <p>
-          Whether you are beginning your first IL BIONDO garment, preparing for
-          a wedding or simply wish to speak with our team, we would be pleased
-          to hear from you.
-        </p>
-      </PageHero>
-      <section className="px-5 pb-24 md:px-10 md:pb-36">
-        <ul className="max-w-xl space-y-6">
-          {ACTIONS.map((action) => (
-            <li key={action.label} className="border-b border-border pb-6">
-              {action.href && action.external ? (
-                <a
-                  href={action.href}
-                  className="font-serif text-3xl tracking-tight transition-colors hover:text-accent md:text-4xl"
-                >
-                  {action.label}
-                </a>
-              ) : action.href ? (
-                <Link
-                  href={action.href}
-                  className="font-serif text-3xl tracking-tight transition-colors hover:text-accent md:text-4xl"
-                >
-                  {action.label}
-                </Link>
-              ) : (
-                <span className="font-serif text-3xl tracking-tight text-muted md:text-4xl">
-                  {action.label}
+      <EditorialHero
+        number="01"
+        eyebrow="THE HOUSE"
+        lines={["AT YOUR", "SERVICE."]}
+        lede={
+          <p>
+            Whether you are beginning your first IL BIONDO garment, preparing
+            for a wedding or simply wish to speak with our team, we would be
+            pleased to hear from you.
+          </p>
+        }
+        meta="CONTACT / IL BIONDO"
+      />
+      <section className={cn(editorialGutter, "pb-24 md:pb-36")}>
+        <ul>
+          {ACTIONS.map((action, index) => {
+            const number = String(index + 1).padStart(2, "0");
+            const inner = (
+              <>
+                <span className="flex min-w-0 items-baseline gap-6 md:gap-16">
+                  <span className="font-serif text-sm tracking-[0.12em] text-muted">
+                    {number}
+                  </span>
+                  <span className="font-serif text-[clamp(1.6rem,3.5vw,2.75rem)] leading-none tracking-[-0.03em] transition-transform duration-300 group-hover:translate-x-1">
+                    {action.label}
+                  </span>
                 </span>
-              )}
-            </li>
-          ))}
+                <span
+                  aria-hidden
+                  className="text-lg transition-transform duration-300 group-hover:translate-x-2"
+                >
+                  →
+                </span>
+              </>
+            );
+
+            const rowClass =
+              "group flex items-center justify-between gap-6 border-b border-accent/15 py-7 transition-colors duration-300 hover:border-accent md:py-9";
+
+            if (action.href && action.external) {
+              return (
+                <li key={action.label}>
+                  <a href={action.href} className={rowClass}>
+                    {inner}
+                  </a>
+                </li>
+              );
+            }
+
+            if (action.href) {
+              return (
+                <li key={action.label}>
+                  <Link href={action.href} className={rowClass}>
+                    {inner}
+                  </Link>
+                </li>
+              );
+            }
+
+            return (
+              <li key={action.label}>
+                <div className={cn(rowClass, "pointer-events-none opacity-45")}>
+                  {inner}
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </section>
     </>

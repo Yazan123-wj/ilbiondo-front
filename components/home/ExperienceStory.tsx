@@ -1,25 +1,12 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useCallback, useRef, useState } from "react";
-import type { Group } from "three";
+import { useRef } from "react";
 
 import { CurtainLine } from "@/components/home/CurtainLine";
-import { CanvasErrorBoundary } from "@/components/three/CanvasErrorBoundary";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
-
-const ProductCanvas = dynamic(
-  () =>
-    import("@/components/three/ProductCanvas").then((module) => module.ProductCanvas),
-  { ssr: false },
-);
-
-function toRad(degrees: number) {
-  return (degrees * Math.PI) / 180;
-}
 
 const DISPLAY =
   "font-serif text-[clamp(2.85rem,7.8vw,7.85rem)] leading-[0.9] tracking-[-0.045em] md:leading-[0.88]";
@@ -36,14 +23,7 @@ export function ExperienceStory() {
   const finalTitleRef = useRef<HTMLDivElement>(null);
   const stage1Ref = useRef<HTMLDivElement>(null);
   const stage2Ref = useRef<HTMLDivElement>(null);
-  const canvasWrapRef = useRef<HTMLDivElement>(null);
-  const groupRef = useRef<Group | null>(null);
-  const [modelReady, setModelReady] = useState(false);
   const isMobile = useIsMobile();
-
-  const handleReady = useCallback(() => {
-    setModelReady(true);
-  }, []);
 
   useGSAP(
     () => {
@@ -103,61 +83,70 @@ export function ExperienceStory() {
           trigger: section,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.5,
+          scrub: 0.45,
           fastScrollEnd: true,
           invalidateOnRefresh: true,
         },
       });
 
+      const enter = 0.1;
+      const hold = 0.28;
+      const leave = 0.08;
+      const stage1Out = enter + hold;
+      const stage2In = stage1Out + 0.02;
+      const stage2Out = stage2In + enter + hold;
+
       timeline.to(
         stage1Lines,
-        { yPercent: 0, duration: 0.12, stagger: 0.03 },
+        { yPercent: 0, duration: enter, stagger: 0.02 },
         0,
       );
-
       timeline.to(
         stage1Lines,
-        { yPercent: -108, duration: 0.08, stagger: 0.02 },
-        0.7,
+        { yPercent: -108, duration: leave, stagger: 0.015 },
+        stage1Out,
       );
-      timeline.to(stage1, { autoAlpha: 0, duration: 0.04 }, 0.76);
+      timeline.to(stage1, { autoAlpha: 0, duration: 0.04 }, stage1Out + leave - 0.02);
 
-      timeline.set(stage2, { autoAlpha: 1 }, 0.74);
+      timeline.set(stage2, { autoAlpha: 1 }, stage2In);
       timeline.to(
         stage2Lines,
-        { yPercent: 0, duration: 0.1, stagger: 0.03 },
-        0.74,
+        { yPercent: 0, duration: enter, stagger: 0.02 },
+        stage2In,
       );
-      timeline.to(stage2, { autoAlpha: 0, duration: 0.06 }, 0.84);
+      timeline.to(
+        stage2Lines,
+        { yPercent: -108, duration: leave, stagger: 0.015 },
+        stage2Out,
+      );
+      timeline.to(stage2, { autoAlpha: 0, duration: 0.05 }, stage2Out + 0.03);
 
       if (navLogo) {
         timeline.fromTo(
           navLogo,
           { autoAlpha: 1, y: 0 },
           { autoAlpha: 0, y: -8, duration: 0.08, immediateRender: false },
-          0.72,
+          stage2Out,
         );
       }
 
-      timeline.to(fade, { autoAlpha: 1, duration: 0.14 }, 0.78);
-
+      timeline.to(fade, { autoAlpha: 1, duration: 0.1 }, stage2Out);
       timeline.to(
         blur,
         {
           filter: `blur(${isMobile ? 10 : 14}px)`,
           autoAlpha: 0.42,
-          duration: 0.12,
+          duration: 0.1,
         },
-        0.86,
+        stage2Out + 0.02,
       );
-
       timeline.to(
         finalLayer,
-        { autoAlpha: 1, y: 0, duration: 0.12 },
-        0.86,
+        { autoAlpha: 1, y: 0, duration: 0.1 },
+        stage2Out + 0.04,
       );
       if (finalTitleLine) {
-        timeline.to(finalTitleLine, { yPercent: 0, duration: 0.1 }, 0.88);
+        timeline.to(finalTitleLine, { yPercent: 0, duration: 0.08 }, stage2Out + 0.06);
       }
 
       return () => {
@@ -171,69 +160,10 @@ export function ExperienceStory() {
     },
   );
 
-  useGSAP(
-    () => {
-      const section = sectionRef.current;
-      const canvasWrap = canvasWrapRef.current;
-      const group = groupRef.current;
-
-      if (!section || !canvasWrap || !modelReady || !group) {
-        return;
-      }
-
-      const startY = isMobile ? -6.4 : -7.2;
-      const exitY = isMobile ? 2.15 : 2.5;
-      const startRot = 0;
-      const endRot = toRad(360);
-
-      gsap.set(canvasWrap, { autoAlpha: 0 });
-      group.position.set(0, startY, 0);
-      group.rotation.set(0, startRot, 0);
-      group.scale.setScalar(1);
-
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        gsap.set(canvasWrap, { autoAlpha: 1 });
-        group.position.set(0, -0.2, 0);
-        group.rotation.set(0, 0, 0);
-        return;
-      }
-
-      const timeline = gsap.timeline({
-        defaults: { ease: "none" },
-        scrollTrigger: {
-          id: "experience-model",
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.5,
-          fastScrollEnd: true,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      timeline.to(canvasWrap, { autoAlpha: 1, duration: 0.04 }, 0.18);
-      timeline.to(
-        group.position,
-        { x: 0, y: exitY, z: 0, duration: 0.62 },
-        0.18,
-      );
-      timeline.to(group.rotation, { x: 0, y: endRot, z: 0, duration: 0.36 }, 0.44);
-
-      return () => {
-        ScrollTrigger.getById("experience-model")?.kill();
-      };
-    },
-    {
-      dependencies: [modelReady, isMobile],
-      scope: sectionRef,
-      revertOnUpdate: true,
-    },
-  );
-
   return (
     <section
       ref={sectionRef}
-      className="relative h-[400vh] overflow-x-clip bg-background md:h-[430vh]"
+      className="relative h-[240vh] overflow-x-clip bg-background md:h-[260vh]"
     >
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-background">
         <div
@@ -301,20 +231,6 @@ export function ExperienceStory() {
                 </p>
               </CurtainLine>
             </div>
-          </div>
-
-          <div
-            ref={canvasWrapRef}
-            className="pointer-events-none invisible absolute inset-0 z-20 h-full w-full overflow-hidden opacity-0"
-          >
-            <CanvasErrorBoundary>
-              <ProductCanvas
-                groupRef={groupRef}
-                isMobile={isMobile}
-                onReady={handleReady}
-                className="h-full w-full"
-              />
-            </CanvasErrorBoundary>
           </div>
 
           <div

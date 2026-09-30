@@ -20,6 +20,8 @@ function CameraRig() {
       return;
     }
 
+    /* Three.js cameras are mutable objects; this is the standard R3F pattern. */
+    /* eslint-disable react-hooks/immutability */
     camera.position.set(0, 0, 5);
     camera.near = 0.1;
     camera.far = 20;
@@ -27,6 +29,7 @@ function CameraRig() {
     camera.zoom = fill;
     camera.lookAt(0, 0, 0);
     camera.updateProjectionMatrix();
+    /* eslint-enable react-hooks/immutability */
   }, [camera, size]);
 
   return null;

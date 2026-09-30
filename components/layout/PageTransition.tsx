@@ -27,8 +27,15 @@ export function PageTransition({ children }: PageTransitionProps) {
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         gsap.fromTo(
           element,
-          { autoAlpha: 0, y: 18 },
-          { autoAlpha: 1, y: 0, duration: 0.55, ease: "power2.out" },
+          { autoAlpha: 0 },
+          {
+            autoAlpha: 1,
+            duration: 0.45,
+            ease: "power2.out",
+            onComplete: () => {
+              gsap.set(element, { clearProps: "opacity,visibility" });
+            },
+          },
         );
       });
 

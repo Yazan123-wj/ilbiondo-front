@@ -70,3 +70,19 @@ export const NAV_GROUPS: NavGroup[] = [
     ],
   },
 ];
+
+export const MENU_PRIMARY: NavLink[] = [
+  { label: "Home", href: "/" },
+  { label: "Our Story", href: "/our-story" },
+  { label: "The Journey", href: "/process" },
+  { label: "Services", href: "/services" },
+  { label: "The Club", href: "/club" },
+  { label: "Appointments", href: "/appointments" },
+];
+
+export const MENU_SECONDARY: NavLink[] = [
+  { label: "Visit", href: "/visit" },
+  { label: "Contact", href: "/contact" },
+  { label: "Privileges", href: "/club/privileges" },
+  { label: "The Founders", href: "/our-story#founders" },
+];

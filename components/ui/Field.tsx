@@ -3,7 +3,7 @@ import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes } from "react
 import { cn } from "@/lib/utils";
 
 const fieldClassName =
-  "mt-3 w-full border-0 border-b border-border bg-transparent py-3 text-base outline-none transition-colors duration-300 focus:border-foreground";
+  "mt-4 w-full border-0 border-b border-foreground/20 bg-transparent py-4 font-serif text-xl outline-none transition-colors duration-300 focus:border-accent md:text-2xl";
 
 type FieldShellProps = {
   id: string;

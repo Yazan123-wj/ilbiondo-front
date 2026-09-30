@@ -12,9 +12,14 @@ export function HashScroll() {
       return;
     }
 
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
     const frame = window.requestAnimationFrame(() => {
       document.getElementById(hash)?.scrollIntoView({
         block: "start",
+        behavior: reduce ? "auto" : "smooth",
       });
     });
 

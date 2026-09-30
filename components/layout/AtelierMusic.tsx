@@ -82,9 +82,10 @@ export function AtelierMusicProvider({
     audio.volume = TARGET_VOLUME;
     audioRef.current = audio;
 
+    let frame = 0;
     if (window.localStorage.getItem(STORAGE_KEY) === "on") {
-      setEnabled(true);
       play(audio);
+      frame = window.requestAnimationFrame(() => setEnabled(true));
     }
 
     const onVisibility = () => {
@@ -100,6 +101,7 @@ export function AtelierMusicProvider({
     document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
+      if (frame) window.cancelAnimationFrame(frame);
       clearUnlock();
       document.removeEventListener("visibilitychange", onVisibility);
       audio.pause();

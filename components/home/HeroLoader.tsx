@@ -70,9 +70,12 @@ export function HeroLoader({ videoRef, onComplete }: HeroLoaderProps) {
       html.style.overflow = "hidden";
       body.style.overflow = "hidden";
 
-      if (video) {
-        video.pause();
-        video.currentTime = 0;
+      const media = video;
+      if (media) {
+        media.pause();
+        // HTMLMediaElement time is reset for the loader replay, not React state.
+        // eslint-disable-next-line react-hooks/immutability -- media element API
+        media.currentTime = 0;
       }
 
       const hole = { width: 0, height: 0 };
