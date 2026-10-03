@@ -14,43 +14,63 @@ import { TextField } from "@/components/ui/Field";
 import { Modal } from "@/components/ui/Modal";
 import { cn } from "@/lib/utils";
 
+type WalletTarget = "apple" | "google";
+
 type MembershipState = {
   name: string;
-  email: string;
   phone: string;
+  password: string;
+  birthDate: string;
 };
 
 const INITIAL: MembershipState = {
   name: "",
-  email: "",
   phone: "",
+  password: "",
+  birthDate: "",
 };
 
 export function MembershipSection() {
-  const [open, setOpen] = useState(false);
+  const [wallet, setWallet] = useState<WalletTarget | null>(null);
   const [values, setValues] = useState<MembershipState>(INITIAL);
   const [errors, setErrors] = useState<Partial<MembershipState>>({});
   const [ready, setReady] = useState(false);
   const [displayName, setDisplayName] = useState("Member");
+
+  const open = wallet !== null;
+
+  const openWallet = (target: WalletTarget) => {
+    setWallet(target);
+    setErrors({});
+  };
+
+  const closeWallet = () => {
+    setWallet(null);
+  };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const nextErrors: Partial<MembershipState> = {};
     if (!values.name.trim()) nextErrors.name = "Please enter your full name.";
-    if (!values.email.trim()) nextErrors.email = "Please enter your email.";
     if (!values.phone.trim())
       nextErrors.phone = "Please enter your phone number.";
+    if (values.password.trim().length < 6) {
+      nextErrors.password = "Please enter at least 6 characters.";
+    }
+    if (!values.birthDate) {
+      nextErrors.birthDate = "Please enter your date of birth.";
+    }
 
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
       return;
     }
 
-    // TODO: Connect to Django membership API
+    // TODO: Connect to Django membership API and wallet pass generation
     setDisplayName(values.name.trim());
     setReady(true);
-    setOpen(false);
+    setWallet(null);
   };
 
   return (
@@ -83,30 +103,23 @@ export function MembershipSection() {
             to IL BIONDO Club privileges and member-only services.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="mt-10 inline-flex bg-accent px-8 py-3.5 text-[11px] tracking-[0.22em] text-background uppercase transition-opacity hover:opacity-85"
-        >
-          Create your Membership
-        </button>
         {ready ? (
           <p className="mt-6 max-w-md text-sm leading-7 text-muted">
             Your membership details are ready to be submitted.
           </p>
         ) : null}
-        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:gap-8">
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
           <button
             type="button"
-            className="nav-label text-muted transition-colors hover:text-foreground"
-            // TODO: Connect Apple Wallet pass generation
+            onClick={() => openWallet("apple")}
+            className="inline-flex h-16 flex-1 items-center justify-center bg-foreground px-6 text-[12px] tracking-[0.18em] text-background uppercase transition-opacity hover:opacity-85"
           >
             Add to Apple Wallet
           </button>
           <button
             type="button"
-            className="nav-label text-muted transition-colors hover:text-foreground"
-            // TODO: Connect Google Wallet pass generation
+            onClick={() => openWallet("google")}
+            className="inline-flex h-16 flex-1 items-center justify-center border border-foreground px-6 text-[12px] tracking-[0.18em] uppercase transition-colors hover:bg-foreground hover:text-background"
           >
             Add to Google Wallet
           </button>
@@ -124,13 +137,20 @@ export function MembershipSection() {
 
       <Modal
         open={open}
-        title="Create your membership"
-        onClose={() => setOpen(false)}
+        eyebrow="Membership"
+        title="Open your card"
+        description={
+          wallet === "google"
+            ? "A moment, and your pass is ready for Google Wallet."
+            : "A moment, and your pass is ready for Apple Wallet."
+        }
+        onClose={closeWallet}
       >
         <form onSubmit={onSubmit} className="space-y-8" noValidate>
           <TextField
             id="member-name"
             label="Full name"
+            autoComplete="name"
             value={values.name}
             error={errors.name}
             onChange={(event) =>
@@ -138,22 +158,12 @@ export function MembershipSection() {
             }
           />
           <TextField
-            id="member-email"
-            type="email"
-            label="Email"
-            value={values.email}
-            error={errors.email}
-            onChange={(event) =>
-              setValues((current) => ({
-                ...current,
-                email: event.target.value,
-              }))
-            }
-          />
-          <TextField
             id="member-phone"
             type="tel"
-            label="Phone"
+            label="Mobile"
+            autoComplete="tel"
+            placeholder="+962 7 0000 0000"
+            className="placeholder:text-muted/45"
             value={values.phone}
             error={errors.phone}
             onChange={(event) =>
@@ -163,11 +173,41 @@ export function MembershipSection() {
               }))
             }
           />
+          <TextField
+            id="member-password"
+            type="password"
+            label="Password"
+            autoComplete="new-password"
+            placeholder="At least 6 characters"
+            className="placeholder:text-muted/45"
+            value={values.password}
+            error={errors.password}
+            onChange={(event) =>
+              setValues((current) => ({
+                ...current,
+                password: event.target.value,
+              }))
+            }
+          />
+          <TextField
+            id="member-birthdate"
+            type="date"
+            label="Date of birth"
+            autoComplete="bday"
+            value={values.birthDate}
+            error={errors.birthDate}
+            onChange={(event) =>
+              setValues((current) => ({
+                ...current,
+                birthDate: event.target.value,
+              }))
+            }
+          />
           <button
             type="submit"
-            className="inline-flex bg-accent px-8 py-3.5 text-[11px] tracking-[0.22em] text-background uppercase transition-opacity hover:opacity-85"
+            className="inline-flex w-full items-center justify-center bg-accent px-8 py-3.5 text-[11px] tracking-[0.22em] text-background uppercase transition-opacity hover:opacity-85"
           >
-            Continue
+            Issue my Card
           </button>
         </form>
       </Modal>

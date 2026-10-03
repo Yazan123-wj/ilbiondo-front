@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { CountUp } from "@/components/bits/CountUp";
 import { SplitText } from "@/components/bits/SplitText";
+import { ExperienceSection } from "@/components/club/ExperienceSection";
 import { MembershipSection } from "@/components/club/MembershipSection";
 import { EditorialCTA } from "@/components/editorial/EditorialCTA";
 import { EditorialHero } from "@/components/editorial/EditorialHero";
@@ -121,6 +122,8 @@ export function ClubView() {
       </section>
 
       <MembershipSection />
+
+      <ExperienceSection />
 
       <section
         className={cn(

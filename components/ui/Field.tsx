@@ -1,4 +1,9 @@
-import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes } from "react";
+import type {
+  InputHTMLAttributes,
+  ReactNode,
+  SelectHTMLAttributes,
+  TextareaHTMLAttributes,
+} from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -37,6 +42,29 @@ export function TextField({ id, label, error, className, ...props }: TextFieldPr
   return (
     <FieldShell id={id ?? ""} label={label} error={error}>
       <input id={id} className={cn(fieldClassName, className)} {...props} />
+    </FieldShell>
+  );
+}
+
+type TextareaFieldProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  label: string;
+  error?: string;
+};
+
+export function TextareaField({
+  id,
+  label,
+  error,
+  className,
+  ...props
+}: TextareaFieldProps) {
+  return (
+    <FieldShell id={id ?? ""} label={label} error={error}>
+      <textarea
+        id={id}
+        className={cn(fieldClassName, "min-h-28 resize-none md:min-h-32", className)}
+        {...props}
+      />
     </FieldShell>
   );
 }

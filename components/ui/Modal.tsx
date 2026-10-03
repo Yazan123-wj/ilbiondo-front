@@ -5,11 +5,20 @@ import { useEffect, type ReactNode } from "react";
 type ModalProps = {
   open: boolean;
   title: string;
+  eyebrow?: string;
+  description?: string;
   onClose: () => void;
   children: ReactNode;
 };
 
-export function Modal({ open, title, onClose, children }: ModalProps) {
+export function Modal({
+  open,
+  title,
+  eyebrow,
+  description,
+  onClose,
+  children,
+}: ModalProps) {
   useEffect(() => {
     if (!open) {
       return;
@@ -48,15 +57,27 @@ export function Modal({ open, title, onClose, children }: ModalProps) {
         className="relative z-10 w-full max-w-lg border border-border bg-background p-8 md:p-10"
       >
         <div className="flex items-start justify-between gap-6">
-          <h2 id="modal-title" className="font-serif text-3xl tracking-tight">
-            {title}
-          </h2>
+          <div>
+            {eyebrow ? (
+              <p className="nav-label text-muted">{eyebrow}</p>
+            ) : null}
+            <h2
+              id="modal-title"
+              className="font-serif text-3xl tracking-tight md:text-4xl"
+            >
+              {title}
+            </h2>
+            {description ? (
+              <p className="mt-3 text-sm leading-7 text-muted">{description}</p>
+            ) : null}
+          </div>
           <button
             type="button"
             onClick={onClose}
             className="nav-label text-muted"
+            aria-label="Close"
           >
-            Close
+            ×
           </button>
         </div>
         <div className="mt-8">{children}</div>

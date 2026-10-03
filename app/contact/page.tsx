@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { ContactForm } from "@/components/contact/ContactForm";
 import { EditorialHero } from "@/components/editorial/EditorialHero";
 import { editorialGutter } from "@/components/editorial/styles";
 import { CONTACT } from "@/lib/contact";
@@ -59,8 +60,11 @@ export default function ContactPage() {
           </p>
         }
         meta="CONTACT / IL BIONDO"
+        compact
+        align="start"
+        aside={<ContactForm />}
       />
-      <section className={cn(editorialGutter, "pb-24 md:pb-36")}>
+      <section className={cn(editorialGutter, "pt-16 pb-24 md:pt-28 md:pb-36")}>
         <ul>
           {ACTIONS.map((action, index) => {
             const number = String(index + 1).padStart(2, "0");

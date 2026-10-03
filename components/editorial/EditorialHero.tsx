@@ -30,6 +30,7 @@ type EditorialHeroProps = {
   imageSide?: "right" | "left" | "full";
   tone?: "light" | "dark";
   compact?: boolean;
+  align?: "start" | "end";
   className?: string;
 };
 
@@ -44,6 +45,7 @@ export function EditorialHero({
   imageSide = "right",
   tone = "light",
   compact = false,
+  align = "end",
   className,
 }: EditorialHeroProps) {
   const ref = useRef<HTMLElement>(null);
@@ -109,7 +111,10 @@ export function EditorialHero({
       ref={ref}
       className={cn(
         editorialGutter,
-        "relative flex min-h-[85svh] flex-col justify-end pb-10 pt-28 md:min-h-[100svh] md:pb-14 md:pt-32",
+        "relative flex flex-col",
+        align === "start"
+          ? "justify-start pb-12 pt-28 md:pb-16 md:pt-36"
+          : "min-h-[85svh] justify-end pb-10 pt-28 md:min-h-[100svh] md:pb-14 md:pt-32",
         dark ? "bg-accent" : "bg-background",
         className,
       )}
@@ -167,7 +172,7 @@ export function EditorialHero({
         </div>
 
         {aside ? (
-          <div className="md:col-span-5">{aside}</div>
+          <div className="md:col-span-5 md:h-0 md:min-h-full">{aside}</div>
         ) : image && imageSide !== "full" ? (
           <div
             className={cn(
