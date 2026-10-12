@@ -1,68 +1,59 @@
+import { PassQr } from "@/components/club/PassQr";
 import { BrandMark } from "@/components/shared/BrandMark";
 import { cn } from "@/lib/utils";
 
 type MembershipCardProps = {
   name?: string;
+  number?: string;
   className?: string;
-  tone?: "burgundy" | "cream";
 };
 
 export function MembershipCard({
-  name = "Member",
+  name = "John Doe",
+  number = "00098533",
   className,
-  tone = "burgundy",
 }: MembershipCardProps) {
-  const burgundy = tone === "burgundy";
+  const serial = number.startsWith("#") ? number : `#${number}`;
 
   return (
-    <div
+    <article
       className={cn(
-        "relative aspect-[1.586/1] w-full max-w-md overflow-hidden",
-        burgundy
-          ? "bg-accent text-background"
-          : "border border-background/15 bg-background text-accent",
+        "relative mx-auto flex aspect-[5/7] w-full max-w-[22rem] flex-col overflow-hidden rounded-[1.35rem] bg-accent px-6 py-6 text-background md:px-7 md:py-7",
         className,
       )}
     >
-      <div className="absolute inset-0 p-7 md:p-8">
-        <div className="flex items-start justify-between">
-          <p className="text-[10px] tracking-[0.32em] uppercase">
-            IL BIONDO Club
-          </p>
-          <div className="h-10 w-10 md:h-12 md:w-12">
-            <BrandMark />
-          </div>
+      <div className="flex items-start justify-between">
+        <div className="h-10 w-10 text-background md:h-11 md:w-11">
+          <BrandMark mark />
         </div>
-        <p
-          className={cn(
-            "mt-8 text-[10px] tracking-[0.28em] uppercase",
-            burgundy ? "opacity-70" : "opacity-60",
-          )}
-        >
-          Member
+        <p className="pt-1 text-[11px] tracking-[0.08em] text-background/80">
+          {serial}
         </p>
-        <p className="mt-2 font-serif text-3xl tracking-tight md:text-4xl">
+      </div>
+
+      <div className="mt-10 text-center md:mt-12">
+        <p className="font-serif text-[clamp(2rem,6vw,2.55rem)] leading-none tracking-[0.12em]">
+          IL BIONDO
+        </p>
+        <p className="mt-3 text-[11px] tracking-[0.42em] text-background/80 uppercase">
+          Jordan
+        </p>
+      </div>
+
+      <div className="mt-10 md:mt-12">
+        <p className="text-[10px] tracking-[0.28em] text-background/70 uppercase">
+          Name
+        </p>
+        <p className="mt-1 font-serif text-[1.65rem] leading-none tracking-tight md:text-[1.85rem]">
           {name}
         </p>
-        <div className="absolute inset-x-7 bottom-7 flex items-end justify-between md:inset-x-8 md:bottom-8">
-          <p
-            className={cn(
-              "text-[10px] tracking-[0.22em] uppercase",
-              burgundy ? "opacity-60" : "opacity-55",
-            )}
-          >
-            Private membership
-          </p>
-          <p
-            className={cn(
-              "text-[10px] tracking-[0.22em] uppercase",
-              burgundy ? "opacity-60" : "opacity-55",
-            )}
-          >
-            Amman
-          </p>
+      </div>
+
+      <div className="mt-auto flex justify-center pt-8">
+        <div className="w-[46%] rounded-[0.45rem] bg-background p-[0.55rem]">
+          <PassQr value={`ILBIONDO-${serial}-${name}`} className="h-full w-full" />
         </div>
       </div>
-    </div>
+    </article>
   );
 }

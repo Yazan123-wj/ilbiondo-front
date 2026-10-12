@@ -35,7 +35,8 @@ export function MembershipSection() {
   const [values, setValues] = useState<MembershipState>(INITIAL);
   const [errors, setErrors] = useState<Partial<MembershipState>>({});
   const [ready, setReady] = useState(false);
-  const [displayName, setDisplayName] = useState("Member");
+  const [displayName, setDisplayName] = useState("John Doe");
+  const [memberNumber, setMemberNumber] = useState("00098533");
 
   const open = wallet !== null;
 
@@ -68,17 +69,17 @@ export function MembershipSection() {
     }
 
     // TODO: Connect to Django membership API and wallet pass generation
-    setDisplayName(values.name.trim());
+    setDisplayName(values.name.trim().split(" ")[0] || values.name.trim());
+    setMemberNumber(String(Math.floor(10000000 + Math.random() * 90000000)));
     setReady(true);
     setWallet(null);
   };
 
   return (
     <section
-      id="membership"
       className={cn(
         editorialGutter,
-        "scroll-mt-24 grid items-center gap-12 py-16 md:scroll-mt-28 md:grid-cols-12 md:gap-10 md:py-28",
+        "grid items-center gap-12 py-16 md:grid-cols-12 md:gap-10 md:py-28",
       )}
     >
       <div className="md:col-span-6">
@@ -108,18 +109,21 @@ export function MembershipSection() {
             Your membership details are ready to be submitted.
           </p>
         ) : null}
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+        <div
+          id="membership"
+          className="mt-10 flex scroll-mt-24 flex-col gap-3 sm:flex-row md:scroll-mt-28"
+        >
           <button
             type="button"
             onClick={() => openWallet("apple")}
-            className="inline-flex h-16 flex-1 items-center justify-center bg-foreground px-6 text-[12px] tracking-[0.18em] text-background uppercase transition-opacity hover:opacity-85"
+            className="inline-flex h-16 flex-1 items-center justify-center bg-accent px-6 text-[12px] tracking-[0.18em] text-background uppercase transition-opacity hover:opacity-85"
           >
             Add to Apple Wallet
           </button>
           <button
             type="button"
             onClick={() => openWallet("google")}
-            className="inline-flex h-16 flex-1 items-center justify-center border border-foreground px-6 text-[12px] tracking-[0.18em] uppercase transition-colors hover:bg-foreground hover:text-background"
+            className="inline-flex h-16 flex-1 items-center justify-center border border-accent px-6 text-[12px] tracking-[0.18em] text-accent uppercase transition-colors hover:bg-accent hover:text-background"
           >
             Add to Google Wallet
           </button>
@@ -131,7 +135,11 @@ export function MembershipSection() {
 
       <div className="md:col-span-5 md:col-start-8">
         <TiltedCard>
-          <MembershipCard name={displayName} className="max-w-none" />
+          <MembershipCard
+            name={displayName}
+            number={memberNumber}
+            className="max-w-none"
+          />
         </TiltedCard>
       </div>
 

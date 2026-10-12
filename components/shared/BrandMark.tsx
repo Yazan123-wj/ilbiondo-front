@@ -3,12 +3,17 @@ import { cn } from "@/lib/utils";
 type BrandMarkProps = {
   className?: string;
   title?: string;
+  mark?: boolean;
 };
 
-export function BrandMark({ className, title = "IL BIONDO" }: BrandMarkProps) {
+export function BrandMark({
+  className,
+  title = "IL BIONDO",
+  mark = false,
+}: BrandMarkProps) {
   return (
     <svg
-      viewBox="0 0 219.5 179.96"
+      viewBox={mark ? "66 0 88 80" : "0 0 219.5 179.96"}
       className={cn("h-full w-auto", className)}
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"

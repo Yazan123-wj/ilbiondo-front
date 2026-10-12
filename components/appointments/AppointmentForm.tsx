@@ -6,12 +6,18 @@ import { SelectField, TextField } from "@/components/ui/Field";
 import { APPOINTMENT_SERVICES, APPOINTMENT_TIMES } from "@/lib/contact";
 
 type FormState = {
+  name: string;
+  phone: string;
+  email: string;
   service: string;
   date: string;
   time: string;
 };
 
 const INITIAL: FormState = {
+  name: "",
+  phone: "",
+  email: "",
   service: "",
   date: "",
   time: "",
@@ -26,6 +32,13 @@ export function AppointmentForm() {
     event.preventDefault();
 
     const nextErrors: Partial<FormState> = {};
+    if (!values.name.trim()) nextErrors.name = "Please enter your full name.";
+    if (!values.phone.trim())
+      nextErrors.phone = "Please enter your phone number.";
+    if (!values.email.trim()) nextErrors.email = "Please enter your email.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
+      nextErrors.email = "Please enter a valid email.";
+    }
     if (!values.service) nextErrors.service = "Please select a service.";
     if (!values.date) nextErrors.date = "Please choose a date.";
     if (!values.time) nextErrors.time = "Please choose a time.";
@@ -55,6 +68,38 @@ export function AppointmentForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-10" noValidate>
+      <TextField
+        id="appointment-name"
+        label="Full name"
+        autoComplete="name"
+        value={values.name}
+        error={errors.name}
+        onChange={(event) =>
+          setValues((current) => ({ ...current, name: event.target.value }))
+        }
+      />
+      <TextField
+        id="appointment-phone"
+        type="tel"
+        label="Phone"
+        autoComplete="tel"
+        value={values.phone}
+        error={errors.phone}
+        onChange={(event) =>
+          setValues((current) => ({ ...current, phone: event.target.value }))
+        }
+      />
+      <TextField
+        id="appointment-email"
+        type="email"
+        label="Email"
+        autoComplete="email"
+        value={values.email}
+        error={errors.email}
+        onChange={(event) =>
+          setValues((current) => ({ ...current, email: event.target.value }))
+        }
+      />
       <SelectField
         id="service"
         label="Service"

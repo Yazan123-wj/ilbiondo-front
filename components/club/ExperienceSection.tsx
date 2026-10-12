@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import {
   editorialDisplay,
   editorialGutter,
@@ -51,12 +49,12 @@ export function ExperienceSection() {
           Feedback is open to members of the club. Add your card and tell us as
           often as you like — we read every note.
         </p>
-        <Link
+        <a
           href="#membership"
           className="mt-10 inline-flex bg-accent px-8 py-3.5 text-[11px] tracking-[0.22em] text-background uppercase transition-opacity hover:opacity-85"
         >
           Join our Club
-        </Link>
+        </a>
       </div>
     </section>
   );

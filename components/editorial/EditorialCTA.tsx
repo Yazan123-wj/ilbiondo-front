@@ -15,15 +15,14 @@ export function EditorialCTA({
   className,
   tone = "dark",
 }: EditorialCTAProps) {
-  return (
-    <Link
-      href={href}
-      className={cn(
-        "group inline-flex w-fit items-center gap-3 text-[11px] tracking-[0.2em] uppercase transition-colors duration-300",
-        tone === "dark" ? "text-foreground hover:text-accent" : "text-background",
-        className,
-      )}
-    >
+  const classNames = cn(
+    "group inline-flex w-fit items-center gap-3 text-[11px] tracking-[0.2em] uppercase transition-colors duration-300",
+    tone === "dark" ? "text-foreground hover:text-accent" : "text-background",
+    className,
+  );
+
+  const inner = (
+    <>
       <span>{children}</span>
       <span
         aria-hidden
@@ -31,6 +30,20 @@ export function EditorialCTA({
       >
         →
       </span>
+    </>
+  );
+
+  if (href.startsWith("#")) {
+    return (
+      <a href={href} className={classNames}>
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={classNames}>
+      {inner}
     </Link>
   );
 }
