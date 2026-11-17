@@ -53,7 +53,6 @@ export function SiteNav({
   const scrolled = forceScrolled ?? internalScrolled;
   const light = inverted && !scrolled && !open;
   const pill = solid && !open;
-  const hideLogoUntilScroll = logoRef != null;
   const ivory = open || filled || !inverted || scrolled;
   const ctaClassName = cn(
     "pointer-events-auto border px-3 py-2 text-[11px] tracking-[0.22em] uppercase transition-colors duration-500 md:px-5 md:py-2.5",
@@ -106,10 +105,7 @@ export function SiteNav({
                 <DualToneWordmark
                   ref={logoRef}
                   onMedia={!ivory}
-                  className={cn(
-                    "relative pointer-events-auto h-12 md:h-16",
-                    hideLogoUntilScroll && "opacity-0",
-                  )}
+                  className="relative pointer-events-auto h-12 md:h-16"
                 />
               ) : (
                 <Link

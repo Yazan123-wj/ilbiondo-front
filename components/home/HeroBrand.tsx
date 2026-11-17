@@ -6,19 +6,19 @@ import { useRef } from "react";
 import { DualToneWordmark } from "@/components/shared/DualToneWordmark";
 import { gsap, useGSAP } from "@/lib/gsap";
 
-type HeroBrandProps = {
-  logoRef: React.RefObject<HTMLAnchorElement | null>;
-  taglineRef: React.RefObject<HTMLDivElement | null>;
-};
-
-export function HeroBrand({ logoRef, taglineRef }: HeroBrandProps) {
+export function HeroBrand() {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLAnchorElement>(null);
+  const lineOneRef = useRef<HTMLParagraphElement>(null);
+  const lineTwoRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const wrap = wrapRef.current;
-      const tagline = taglineRef.current;
-      if (!wrap || !tagline) {
+      const logo = logoRef.current;
+      const lineOne = lineOneRef.current;
+      const lineTwo = lineTwoRef.current;
+      if (!wrap || !logo || !lineOne || !lineTwo) {
         return;
       }
 
@@ -26,25 +26,29 @@ export function HeroBrand({ logoRef, taglineRef }: HeroBrandProps) {
         "(prefers-reduced-motion: reduce)",
       ).matches;
 
-      gsap.set(wrap, { autoAlpha: 0 });
-      gsap.set(tagline, { autoAlpha: 0, y: 8 });
+      gsap.set([logo, lineOne, lineTwo], { autoAlpha: 0, y: 0 });
 
       if (reduceMotion) {
-        gsap.set(wrap, { autoAlpha: 1 });
-        gsap.set(tagline, { autoAlpha: 1, y: 0 });
+        gsap.set(lineTwo, { autoAlpha: 1 });
         return;
       }
 
-      const intro = gsap.timeline();
-      intro.to(wrap, {
-        autoAlpha: 1,
-        duration: 1.05,
-        ease: "power3.out",
-      });
-      intro.to(
-        tagline,
+      const intro = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+
+      intro.to(logo, { autoAlpha: 1, duration: 0.55, ease: "power2.out" });
+      intro.to(logo, { autoAlpha: 0, duration: 0.7 }, "+=1");
+      intro.fromTo(
+        lineOne,
+        { autoAlpha: 0, y: 10 },
         { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" },
-        0.18,
+        "<0.22",
+      );
+      intro.to(lineOne, { autoAlpha: 0, y: -8, duration: 0.7 }, "+=3");
+      intro.fromTo(
+        lineTwo,
+        { autoAlpha: 0, y: 10 },
+        { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" },
+        "<0.22",
       );
     },
     { scope: wrapRef },
@@ -53,22 +57,32 @@ export function HeroBrand({ logoRef, taglineRef }: HeroBrandProps) {
   return (
     <div
       ref={wrapRef}
+      data-hero-brand
       className="pointer-events-none absolute inset-0 z-20 text-white"
     >
       <DualToneWordmark
         ref={logoRef}
-        className="pointer-events-auto absolute top-1/2 left-1/2 z-10 h-28 md:h-36"
+        className="pointer-events-auto invisible absolute top-1/2 left-1/2 z-10 h-28 -translate-x-1/2 -translate-y-1/2 opacity-0 md:h-36"
       />
-      <div
-        ref={taglineRef}
-        className="absolute top-[calc(50%+6.1rem)] left-1/2 flex w-max -translate-x-1/2 flex-col items-center md:top-[calc(50%+7.6rem)]"
+      <p
+        ref={lineOneRef}
+        className="invisible absolute top-1/2 left-1/2 w-[min(92vw,46rem)] -translate-x-1/2 -translate-y-1/2 text-center font-serif text-[clamp(2.4rem,6.5vw,5.25rem)] leading-[0.95] tracking-[-0.04em] text-white opacity-0"
       >
-        <p className="font-serif text-sm tracking-[0.16em] text-white/90 italic md:text-base">
-          A considered approach to modern tailoring.
+        <span className="block tracking-[0.06em] uppercase">A considered</span>
+        <em className="mt-2 block font-serif tracking-normal">
+          approach to Tailoring
+        </em>
+      </p>
+      <div
+        ref={lineTwoRef}
+        className="invisible absolute top-1/2 left-1/2 flex w-[min(92vw,40rem)] -translate-x-1/2 -translate-y-1/2 flex-col items-center opacity-0"
+      >
+        <p className="font-serif text-[clamp(2.4rem,6.5vw,5.25rem)] leading-[0.95] tracking-[-0.04em] text-white italic">
+          made for one
         </p>
         <Link
           href="/appointments"
-          className="pointer-events-auto mt-6 inline-flex items-center border border-white/25 bg-white/10 px-8 py-3 text-[11px] tracking-[0.2em] text-white uppercase backdrop-blur-md transition-[background-color,border-color] duration-300 hover:border-white/40 hover:bg-white/20"
+          className="pointer-events-auto mt-8 inline-flex items-center border border-white/25 bg-white/10 px-8 py-3 text-[11px] tracking-[0.2em] text-white uppercase backdrop-blur-md transition-[background-color,border-color] duration-300 hover:border-white/40 hover:bg-white/20"
         >
           Book your Appointment
         </Link>

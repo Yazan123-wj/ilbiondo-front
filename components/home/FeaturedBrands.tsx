@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-import { TextReveal } from "@/components/shared/TextReveal";
 import { HOUSES } from "@/data/brands";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { preloadButtonModel } from "@/lib/product";
@@ -95,26 +94,9 @@ export function FeaturedBrands() {
     <section
       ref={sectionRef}
       id="houses"
-      className="relative overflow-hidden bg-surface pt-24 pb-10 md:pt-36 md:pb-12"
+      className="relative overflow-hidden bg-surface pt-24 pb-20 md:pt-36 md:pb-32"
     >
-      <TextReveal className="px-6 text-center md:px-10">
-        <p className="font-serif text-sm tracking-[0.14em] text-muted">
-          the <span className="uppercase tracking-[0.22em]">mills</span>{" "}
-          <em className="text-accent">we cut from</em>
-        </p>
-        <h2 className="mx-auto mt-5 max-w-3xl font-serif text-[clamp(2.4rem,6vw,5.2rem)] leading-[0.92] tracking-[-0.03em]">
-          Cloth from houses
-          <br />
-          of standing.
-        </h2>
-        <p className="mx-auto mt-8 max-w-md font-serif text-base leading-8 text-muted italic md:text-[1.05rem] md:leading-9">
-          Loro Piana, Holland &amp; Sherry, Scabal, and Dormeuil — mills
-          that have dressed the world, chosen in the atelier for the life
-          you lead.
-        </p>
-      </TextReveal>
-
-      <div className="relative mt-16 md:mt-24">
+      <div className="relative">
         <div
           className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-surface to-transparent md:w-28"
           aria-hidden
@@ -149,12 +131,20 @@ export function FeaturedBrands() {
         </div>
       </div>
 
-      <div className="mt-12 flex justify-center px-6 md:mt-16">
+      <div className="mx-auto mt-20 max-w-2xl px-6 text-center md:mt-28 md:px-10">
+        <h2 className="font-serif text-[clamp(2rem,4.5vw,3.15rem)] leading-[1.12] tracking-[-0.03em]">
+          Your suit begins here.
+        </h2>
+        <p className="mx-auto mt-6 max-w-lg text-[15px] leading-8 text-muted md:text-base md:leading-8">
+          IL BIONDO is the atelier where a garment is cut, fitted and
+          finished around one person. Cloth, proportion and detail are
+          chosen with you — then made by hand until the suit is yours.
+        </p>
         <Link
           href="/appointments"
-          className="inline-flex border-0 bg-accent px-8 py-3.5 text-[11px] tracking-[0.2em] text-background uppercase transition-opacity hover:opacity-85"
+          className="mt-10 inline-flex bg-accent px-8 py-3.5 text-[11px] tracking-[0.22em] text-background uppercase transition-opacity hover:opacity-85"
         >
-          Book an Appointment
+          Book your Appointment
         </Link>
       </div>
     </section>

@@ -40,7 +40,7 @@ export function ClubView() {
               Membership brings you closer to the atelier, with early access,
               private services and experiences reserved for our members.
             </p>
-            <EditorialCTA href="#membership" className="mt-10">
+            <EditorialCTA href="#membership" tone="light" className="mt-10">
               Join IL BIONDO Club
             </EditorialCTA>
           </>
