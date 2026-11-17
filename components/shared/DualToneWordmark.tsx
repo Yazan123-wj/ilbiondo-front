@@ -39,12 +39,13 @@ export function clipWordmarkToMedia(logo: HTMLElement, media: HTMLElement) {
 
 type DualToneWordmarkProps = {
   className?: string;
+  onMedia?: boolean;
 };
 
 export const DualToneWordmark = forwardRef<
   HTMLAnchorElement,
   DualToneWordmarkProps
->(function DualToneWordmark({ className }, ref) {
+>(function DualToneWordmark({ className, onMedia = true }, ref) {
   return (
     <Link
       ref={ref}
@@ -54,7 +55,10 @@ export const DualToneWordmark = forwardRef<
       <BrandMark />
       <span
         data-logo-on-media
-        className="absolute inset-0 text-white"
+        className={cn(
+          "absolute inset-0 text-white",
+          !onMedia && "hidden",
+        )}
         aria-hidden
       >
         <BrandMark />

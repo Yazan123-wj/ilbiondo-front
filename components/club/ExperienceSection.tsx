@@ -10,7 +10,7 @@ export function ExperienceSection() {
       id="experience"
       className={cn(
         editorialGutter,
-        "relative overflow-hidden py-20 md:py-32",
+        "relative overflow-hidden bg-surface py-20 md:py-32",
       )}
     >
       <span

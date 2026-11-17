@@ -16,12 +16,12 @@ type EditorialImageProps = {
 };
 
 const RATIOS = {
-  portrait: "aspect-[4/5]",
-  editorial: "aspect-[3/4]",
-  landscape: "aspect-[3/2]",
-  wide: "aspect-video",
-  square: "aspect-square",
-};
+  portrait: "4 / 5",
+  editorial: "3 / 4",
+  landscape: "3 / 2",
+  wide: "16 / 9",
+  square: "1 / 1",
+} as const;
 
 export function EditorialImage({
   src,
@@ -33,27 +33,31 @@ export function EditorialImage({
   parallax = false,
 }: EditorialImageProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const clipRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
   const [failed, setFailed] = useState(false);
   const showImage = Boolean(src) && !failed;
 
   useGSAP(
     () => {
-      const wrap = wrapRef.current;
+      const clip = clipRef.current;
       const media = mediaRef.current;
-      if (!wrap || !media || reveal === "none") return;
+      if (!clip || !media || reveal === "none") {
+        if (clip) gsap.set(clip, { clipPath: "inset(0% 0% 0% 0%)" });
+        return;
+      }
 
       const reduce = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
 
       if (reduce) {
-        gsap.set(wrap, { clipPath: "inset(0% 0% 0% 0%)" });
+        gsap.set(clip, { clipPath: "inset(0% 0% 0% 0%)" });
         gsap.set(media, { scale: 1, yPercent: 0 });
         return;
       }
 
-      gsap.set(wrap, { clipPath: "inset(100% 0% 0% 0%)" });
+      gsap.set(clip, { clipPath: "inset(100% 0% 0% 0%)" });
       gsap.set(media, { scale: 1.08 });
 
       const revealTween = {
@@ -62,19 +66,28 @@ export function EditorialImage({
       };
 
       if (reveal === "hero") {
-        gsap.to(wrap, { clipPath: "inset(0% 0% 0% 0%)", ...revealTween, delay: 0.28 });
-        gsap.to(media, { scale: 1, duration: 1.25, ease: "power2.out", delay: 0.28 });
-      } else {
-        gsap.to(wrap, {
+        gsap.to(clip, {
           clipPath: "inset(0% 0% 0% 0%)",
           ...revealTween,
-          scrollTrigger: { trigger: wrap, start: "top 86%", once: true },
+          delay: 0.28,
         });
         gsap.to(media, {
           scale: 1,
           duration: 1.25,
           ease: "power2.out",
-          scrollTrigger: { trigger: wrap, start: "top 86%", once: true },
+          delay: 0.28,
+        });
+      } else {
+        gsap.to(clip, {
+          clipPath: "inset(0% 0% 0% 0%)",
+          ...revealTween,
+          scrollTrigger: { trigger: clip, start: "top 86%", once: true },
+        });
+        gsap.to(media, {
+          scale: 1,
+          duration: 1.25,
+          ease: "power2.out",
+          scrollTrigger: { trigger: clip, start: "top 86%", once: true },
         });
       }
 
@@ -86,7 +99,7 @@ export function EditorialImage({
             yPercent: 3,
             ease: "none",
             scrollTrigger: {
-              trigger: wrap,
+              trigger: wrapRef.current,
               start: "top bottom",
               end: "bottom top",
               scrub: true,
@@ -102,28 +115,34 @@ export function EditorialImage({
     <div
       ref={wrapRef}
       data-hero-image
-      className={cn(
-        "relative overflow-hidden bg-[#e7e0d4]",
-        RATIOS[ratio],
-        className,
-      )}
+      className={cn("relative w-full bg-[#e7e0d4]", className)}
+      style={
+        className?.includes("aspect-auto")
+          ? undefined
+          : { aspectRatio: RATIOS[ratio] }
+      }
     >
-      <div ref={mediaRef} className="absolute inset-0 will-change-transform">
-        {showImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={src}
-            alt={alt}
-            className="h-full w-full object-cover"
-            onError={() => setFailed(true)}
-          />
-        ) : (
-          <div className="flex h-full w-full items-end justify-start p-5 md:p-7">
-            <p className="text-[9px] tracking-[0.26em] text-foreground/40 uppercase">
-              {label}
-            </p>
-          </div>
-        )}
+      <div
+        ref={clipRef}
+        className="absolute inset-0 overflow-hidden"
+      >
+        <div ref={mediaRef} className="absolute inset-0 will-change-transform">
+          {showImage ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={src}
+              alt={alt}
+              className="h-full w-full object-cover"
+              onError={() => setFailed(true)}
+            />
+          ) : (
+            <div className="flex h-full w-full items-end justify-start p-5 md:p-7">
+              <p className="text-[9px] tracking-[0.26em] text-foreground/40 uppercase">
+                {label}
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

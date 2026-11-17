@@ -57,11 +57,11 @@ export function HeroBrand({ logoRef, taglineRef }: HeroBrandProps) {
     >
       <DualToneWordmark
         ref={logoRef}
-        className="pointer-events-auto absolute top-1/2 left-1/2 z-10 h-32 md:h-44"
+        className="pointer-events-auto absolute top-1/2 left-1/2 z-10 h-28 md:h-36"
       />
       <div
         ref={taglineRef}
-        className="absolute top-[calc(50%+6.6rem)] left-1/2 flex w-max -translate-x-1/2 flex-col items-center md:top-[calc(50%+8.6rem)]"
+        className="absolute top-[calc(50%+6.1rem)] left-1/2 flex w-max -translate-x-1/2 flex-col items-center md:top-[calc(50%+7.6rem)]"
       >
         <p className="font-serif text-sm tracking-[0.16em] text-white/90 italic md:text-base">
           A considered approach to modern tailoring.

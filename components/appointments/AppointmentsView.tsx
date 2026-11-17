@@ -19,7 +19,7 @@ export function AppointmentsView() {
   return (
     <>
       <EditorialHero
-        lines={["YOUR TIME.", "YOUR EXPERIENCE."]}
+        lines={["Your time.", "Your experience."]}
         image={{
           src: MEDIA.armchair,
           alt: "IL BIONDO appointment",
@@ -43,7 +43,7 @@ export function AppointmentsView() {
         id="book"
         className={cn(
           editorialGutter,
-          "grid items-start gap-16 py-16 md:grid-cols-12 md:gap-10 md:py-28",
+          "grid items-start gap-16 bg-surface py-16 md:grid-cols-12 md:gap-10 md:py-28",
         )}
       >
         <div className="md:col-span-6">

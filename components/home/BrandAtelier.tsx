@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRef } from "react";
 
 import { TextReveal } from "@/components/shared/TextReveal";
@@ -142,12 +141,6 @@ export function BrandAtelier() {
                 className="h-full w-full"
               />
             </div>
-            <Link
-              href="/process"
-              className="inline-flex bg-accent px-8 py-3.5 text-[11px] tracking-[0.2em] text-background uppercase transition-opacity hover:opacity-85"
-            >
-              Discover <em className="mx-1.5 font-serif normal-case tracking-normal italic">the</em> Process
-            </Link>
           </div>
 
           <div className="grid grid-cols-2 gap-2">

@@ -22,7 +22,7 @@ export function ClubView() {
   return (
     <>
       <EditorialHero
-        lines={["THE ART", "OF BELONGING."]}
+        lines={["The art", "of belonging."]}
         image={{
           src: MEDIA.casino,
           alt: "IL BIONDO Club",
@@ -47,7 +47,7 @@ export function ClubView() {
         }
       />
 
-      <section className={cn(editorialGutter, "py-16 md:py-28")}>
+      <section className={cn(editorialGutter, "bg-surface py-16 md:py-28")}>
         <div>
           <p className="text-[11px] tracking-[0.22em] text-accent uppercase">
             The Privileges

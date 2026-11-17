@@ -1,13 +1,9 @@
 export type ProcessStep = {
   number: string;
-  id?: string;
+  id: string;
   label: string;
   title: string;
   paragraphs: string[];
-  cta?: {
-    label: string;
-    href: string;
-  };
 };
 
 export const PROCESS_STEPS: ProcessStep[] = [
@@ -20,10 +16,6 @@ export const PROCESS_STEPS: ProcessStep[] = [
       "Your journey begins with a private appointment at the IL BIONDO atelier.",
       "We discuss your lifestyle, the purpose of the garment and how you want it to feel.",
     ],
-    cta: {
-      label: "Book an Appointment",
-      href: "/appointments",
-    },
   },
   {
     number: "02",
@@ -77,3 +69,16 @@ export const PROCESS_STEPS: ProcessStep[] = [
     ],
   },
 ];
+
+export function getProcessSteps(ids: readonly string[]) {
+  return ids
+    .map((id, index) => {
+      const step = PROCESS_STEPS.find((item) => item.id === id);
+      if (!step) return null;
+      return {
+        ...step,
+        number: String(index + 1).padStart(2, "0"),
+      };
+    })
+    .filter((step): step is ProcessStep => step !== null);
+}

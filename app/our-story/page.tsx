@@ -5,7 +5,7 @@ import { OurStoryView } from "@/components/story/OurStoryView";
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "IL BIONDO began with a simple belief: the best tailoring starts by knowing the person who will wear it.",
+    "Today, the IL BIONDO atelier in Amman continues a philosophy of personal service, considered design and tailoring created around the individual.",
 };
 
 export default function OurStoryPage() {

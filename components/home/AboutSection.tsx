@@ -24,7 +24,7 @@ export function AboutSection() {
           href="/our-story"
           className="mt-10 inline-flex bg-background px-8 py-3.5 text-[11px] tracking-[0.2em] text-accent uppercase transition-opacity hover:opacity-85"
         >
-          Our Story
+          About Us
         </Link>
       </TextReveal>
     </section>

@@ -11,10 +11,5 @@ export function LayoutNav() {
     return null;
   }
 
-  return (
-    <SiteNav
-      showLogo
-      filled={pathname === "/process"}
-    />
-  );
+  return <SiteNav showLogo />;
 }

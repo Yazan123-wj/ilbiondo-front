@@ -3,11 +3,21 @@ export type ServiceBlock = {
   label: string;
   title: string;
   paragraphs: string[];
+  journey: readonly string[];
   cta?: {
     label: string;
     href: string;
   };
 };
+
+const TAILORING_JOURNEY = [
+  "appointment",
+  "measure",
+  "cloth",
+  "first-prova",
+  "second-prova",
+  "delivery",
+] as const;
 
 export const SERVICES: ServiceBlock[] = [
   {
@@ -18,6 +28,7 @@ export const SERVICES: ServiceBlock[] = [
       "A personalised approach to tailoring combining established patterns with your individual measurements, fabric selection and preferred details.",
       "Choose from our collection of fine fabrics and work with our team to define the cut, proportions and finishing of your garment.",
     ],
+    journey: TAILORING_JOURNEY,
     cta: {
       label: "Book Made to Measure",
       href: "/appointments",
@@ -33,6 +44,7 @@ export const SERVICES: ServiceBlock[] = [
       "The process is deliberate.",
       "The result is entirely personal.",
     ],
+    journey: TAILORING_JOURNEY,
     cta: {
       label: "Book a Bespoke Consultation",
       href: "/appointments",
@@ -46,6 +58,7 @@ export const SERVICES: ServiceBlock[] = [
       "Exclusively for IL BIONDO Club members.",
       "Our tailoring team can alter and refine selected garments from your existing wardrobe, helping improve proportion, fit and balance.",
     ],
+    journey: ["appointment", "measure", "first-prova", "delivery"],
     cta: {
       label: "Member Sign In",
       href: "/club",
@@ -60,6 +73,11 @@ export const SERVICES: ServiceBlock[] = [
       "It is about having what works.",
       "Our Private Wardrobe service helps organise and refine your dressing room — reviewing existing pieces, identifying what is missing and creating a wardrobe that works naturally across business, travel, formal occasions and everyday life.",
     ],
+    journey: ["appointment", "cloth", "delivery"],
+    cta: {
+      label: "Book a Wardrobe Consultation",
+      href: "/appointments",
+    },
   },
   {
     id: "the-groom",
@@ -70,6 +88,7 @@ export const SERVICES: ServiceBlock[] = [
       "IL BIONDO offers a dedicated groom service covering the complete wedding wardrobe, fittings, finishing details and personal dressing assistance on the wedding day.",
       "So when the moment arrives, everything is exactly where it should be.",
     ],
+    journey: TAILORING_JOURNEY,
     cta: {
       label: "Book a Groom Consultation",
       href: "/appointments",
@@ -85,9 +104,14 @@ export const SERVICES: ServiceBlock[] = [
       "When a wardrobe requires pieces outside the IL BIONDO collection, our team can assist members in selecting and sourcing garments, footwear and accessories from other houses.",
       "Every choice is considered as part of one wardrobe.",
     ],
+    journey: ["appointment", "cloth", "delivery"],
     cta: {
       label: "Discover IL BIONDO Club",
       href: "/club",
     },
   },
 ];
+
+export function getService(id: string) {
+  return SERVICES.find((service) => service.id === id);
+}

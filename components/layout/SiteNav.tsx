@@ -54,28 +54,36 @@ export function SiteNav({
   const light = inverted && !scrolled && !open;
   const pill = solid && !open;
   const hideLogoUntilScroll = logoRef != null;
+  const ivory = open || filled || !inverted || scrolled;
+  const ctaClassName = cn(
+    "pointer-events-auto border px-3 py-2 text-[11px] tracking-[0.22em] uppercase transition-colors duration-500 md:px-5 md:py-2.5",
+    open
+      ? "border-foreground/20 bg-background text-foreground"
+      : light
+        ? "border-white bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
+        : inverted
+          ? "border-accent bg-transparent text-accent hover:bg-accent hover:text-background"
+          : pill
+            ? "border-accent bg-accent text-background"
+            : "border-foreground/20 text-foreground hover:border-accent hover:bg-accent hover:text-background",
+  );
 
   return (
     <>
-      <header
-        className={cn(
-          "pointer-events-none fixed inset-x-0 top-0 z-50",
-          filled && "bg-background",
-        )}
-      >
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+        <div
+          aria-hidden
+          className={cn(
+            "absolute inset-0 origin-top border-b bg-background transition-[transform,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+            ivory
+              ? "scale-y-100 border-border"
+              : "scale-y-0 border-transparent",
+          )}
+        />
         <div className="relative flex items-center justify-between px-4 py-5 md:px-8">
           <button
             type="button"
-            className={cn(
-              "pointer-events-auto px-3 py-2 text-[11px] tracking-[0.22em] uppercase transition-colors duration-500 md:px-5 md:py-2.5",
-              open
-                ? "border border-foreground/20 bg-background text-foreground"
-                : pill
-                  ? "bg-accent text-background"
-                  : light
-                    ? "border border-white/40 text-white"
-                    : "border border-foreground/20 text-foreground transition-colors duration-[400ms] hover:border-accent hover:bg-accent hover:text-background",
-            )}
+            className={ctaClassName}
             aria-expanded={open}
             aria-controls="site-menu-panel"
             onClick={() => setOpen((value) => !value)}
@@ -84,17 +92,7 @@ export function SiteNav({
           </button>
 
           {open ? null : (
-            <Link
-              href="/contact"
-              className={cn(
-                "pointer-events-auto px-3 py-2 text-[11px] tracking-[0.22em] uppercase transition-colors duration-500 md:px-5 md:py-2.5",
-                pill
-                  ? "bg-accent text-background"
-                  : light
-                    ? "border border-white/40 text-white"
-                    : "border border-foreground/20 text-foreground transition-colors duration-[400ms] hover:border-accent hover:bg-accent hover:text-background",
-              )}
-            >
+            <Link href="/contact" className={ctaClassName}>
               Contact
             </Link>
           )}
@@ -107,8 +105,9 @@ export function SiteNav({
               {logoRef ? (
                 <DualToneWordmark
                   ref={logoRef}
+                  onMedia={!ivory}
                   className={cn(
-                    "relative pointer-events-auto h-9 md:h-11",
+                    "relative pointer-events-auto h-12 md:h-16",
                     hideLogoUntilScroll && "opacity-0",
                   )}
                 />
@@ -116,7 +115,7 @@ export function SiteNav({
                 <Link
                   href="/"
                   className={cn(
-                    "pointer-events-auto h-9 md:h-11",
+                    "pointer-events-auto h-12 md:h-16",
                     light ? "text-background" : "text-accent",
                   )}
                 >

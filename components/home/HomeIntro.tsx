@@ -104,9 +104,15 @@ export function HomeIntro() {
               measureTravel();
               syncLogoTone();
             },
-            onLeave: () => setNavSettled(true),
-            onEnterBack: () => setNavSettled(false),
           },
+        });
+
+        ScrollTrigger.create({
+          id: "hero-nav-ivory",
+          trigger: hero,
+          start: "bottom top",
+          onEnter: () => setNavSettled(true),
+          onLeaveBack: () => setNavSettled(false),
         });
 
         timeline.to(
@@ -130,18 +136,6 @@ export function HomeIntro() {
             immediateRender: false,
           },
           0.08,
-        );
-
-        timeline.fromTo(
-          frame,
-          { scale: 1 },
-          {
-            scale: () => (window.innerWidth < 768 ? 0.96 : 0.94),
-            duration: 0.5,
-            immediateRender: false,
-            force3D: true,
-          },
-          0.12,
         );
 
         timeline.to(
@@ -181,6 +175,7 @@ export function HomeIntro() {
 
       return () => {
         ScrollTrigger.getById("hero-scroll")?.kill();
+        ScrollTrigger.getById("hero-nav-ivory")?.kill();
         mm.revert();
       };
     },

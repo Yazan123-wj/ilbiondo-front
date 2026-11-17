@@ -51,7 +51,7 @@ export default function ContactPage() {
       <EditorialHero
         number="01"
         eyebrow="THE HOUSE"
-        lines={["AT YOUR", "SERVICE."]}
+        lines={["At your", "service."]}
         lede={
           <p>
             Whether you are beginning your first IL BIONDO garment, preparing
@@ -64,7 +64,7 @@ export default function ContactPage() {
         align="start"
         aside={<ContactForm />}
       />
-      <section className={cn(editorialGutter, "pt-16 pb-24 md:pt-28 md:pb-36")}>
+      <section className={cn(editorialGutter, "bg-surface pt-16 pb-24 md:pt-28 md:pb-36")}>
         <ul>
           {ACTIONS.map((action, index) => {
             const number = String(index + 1).padStart(2, "0");

@@ -95,7 +95,7 @@ export function FeaturedBrands() {
     <section
       ref={sectionRef}
       id="houses"
-      className="relative overflow-hidden bg-background pt-24 pb-10 md:pt-36 md:pb-12"
+      className="relative overflow-hidden bg-surface pt-24 pb-10 md:pt-36 md:pb-12"
     >
       <TextReveal className="px-6 text-center md:px-10">
         <p className="font-serif text-sm tracking-[0.14em] text-muted">
@@ -116,11 +116,11 @@ export function FeaturedBrands() {
 
       <div className="relative mt-16 md:mt-24">
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent md:w-28"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-surface to-transparent md:w-28"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent md:w-28"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-surface to-transparent md:w-28"
           aria-hidden
         />
         <div className="overflow-hidden py-4">

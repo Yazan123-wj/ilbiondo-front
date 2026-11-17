@@ -79,7 +79,7 @@ export function MembershipSection() {
     <section
       className={cn(
         editorialGutter,
-        "grid items-center gap-12 py-16 md:grid-cols-12 md:gap-10 md:py-28",
+        "grid items-center gap-12 bg-background py-16 md:grid-cols-12 md:gap-10 md:py-28",
       )}
     >
       <div className="md:col-span-6">

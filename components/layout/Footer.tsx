@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 
 import { BrandMark } from "@/components/shared/BrandMark";
-import { NAV_GROUPS } from "@/data/navigation";
 import { CONTACT } from "@/lib/contact";
 
 function InstagramIcon() {
@@ -55,9 +54,6 @@ const HOUSE_LINKS = [
   { label: "Appointments", href: "/appointments" },
 ] as const;
 
-const JOURNEY_LINKS =
-  NAV_GROUPS.find((group) => group.id === "the-journey")?.items ?? [];
-
 function FooterCol({
   title,
   children,
@@ -97,7 +93,7 @@ function FooterLinks({
 export function Footer() {
   return (
     <footer className="overflow-x-clip border-t border-foreground/10 bg-background px-5 pt-14 pb-8 md:px-10 md:pt-16 md:pb-10">
-      <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-12 lg:gap-y-0">
+      <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-12 lg:gap-y-0">
         <div>
           <Link href="/" className="block w-[8.5rem] text-accent md:w-36">
             <BrandMark />
@@ -132,10 +128,6 @@ export function Footer() {
 
         <FooterCol title="The House">
           <FooterLinks items={HOUSE_LINKS} />
-        </FooterCol>
-
-        <FooterCol title="The Journey">
-          <FooterLinks items={JOURNEY_LINKS} />
         </FooterCol>
 
         <FooterCol title="The Atelier">

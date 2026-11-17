@@ -45,7 +45,7 @@ export function EditorialHero({
   imageSide = "right",
   tone = "light",
   compact = false,
-  align = "end",
+  align = "start",
   className,
 }: EditorialHeroProps) {
   const ref = useRef<HTMLElement>(null);
@@ -87,14 +87,15 @@ export function EditorialHero({
     { scope: ref },
   );
 
+  const framed = Boolean(image) && imageSide !== "full" && !aside;
   const title = (
     <h1
       className={cn(
         editorialDisplay,
-        "mt-6 text-[clamp(2.7rem,12vw,5.25rem)] uppercase md:mt-8",
+        "mt-6 text-[clamp(2.1rem,6vw,3.35rem)] leading-[1.06] tracking-[-0.03em] md:mt-8",
         compact
-          ? "md:text-[clamp(3.2rem,6vw,5.8rem)]"
-          : "md:text-[clamp(4.5rem,8.5vw,9.2rem)]",
+          ? "md:text-[clamp(2.35rem,4vw,3.5rem)]"
+          : "md:text-[clamp(2.6rem,4.5vw,4rem)]",
         dark || imageSide === "full" ? "text-background" : "text-foreground",
       )}
     >
@@ -106,15 +107,56 @@ export function EditorialHero({
     </h1>
   );
 
+  const copy = (
+    <>
+      {eyebrow ? (
+        <EditorialLabel
+          number={number}
+          tone={dark || imageSide === "full" ? "cream" : "accent"}
+        >
+          {eyebrow}
+        </EditorialLabel>
+      ) : null}
+      {title}
+      {lede ? (
+        <div
+          data-hero-copy
+          className={cn(
+            editorialBody,
+            "mt-8 md:mt-10",
+            (dark || imageSide === "full") && "text-background/80",
+          )}
+        >
+          {lede}
+        </div>
+      ) : null}
+    </>
+  );
+
+  const metaLine = meta ? (
+    <p
+      data-hero-meta
+      className={cn(
+        "text-[10px] tracking-[0.22em] uppercase",
+        framed ? "mt-8 md:mt-0" : "relative mt-12 md:mt-16",
+        dark || imageSide === "full" ? "text-background/55" : "text-muted",
+      )}
+    >
+      {meta}
+    </p>
+  ) : null;
+
   return (
     <section
       ref={ref}
       className={cn(
         editorialGutter,
         "relative flex flex-col",
-        align === "start"
-          ? "justify-start pb-12 pt-28 md:pb-16 md:pt-36"
-          : "min-h-[85svh] justify-end pb-10 pt-28 md:min-h-[100svh] md:pb-14 md:pt-32",
+        framed
+          ? "justify-start pb-8 pt-24 md:h-svh md:min-h-svh md:pb-8 md:pt-28"
+          : imageSide === "full" || align === "end"
+            ? "min-h-[85svh] justify-end pb-10 pt-24 md:min-h-[100svh] md:pb-14 md:pt-28"
+            : "justify-start pb-10 pt-24 md:pb-14 md:pt-28",
         dark ? "bg-accent" : "bg-background",
         className,
       )}
@@ -133,42 +175,28 @@ export function EditorialHero({
 
       <div
         className={cn(
-          "relative grid items-end gap-10 md:grid-cols-12 md:items-stretch md:gap-8",
+          "relative grid items-end gap-10 md:grid-cols-12 md:gap-8",
+          framed && "md:min-h-0 md:flex-1 md:items-stretch",
+          aside ? "md:items-stretch" : !framed && "md:items-start",
           imageSide === "full" && "text-background",
         )}
       >
         <div
           className={cn(
-            image || aside
+            image && !aside
               ? imageSide === "left"
                 ? "md:col-span-5 md:col-start-8"
                 : imageSide === "full"
-                  ? "md:col-span-8"
-                  : "md:col-span-7"
-              : "md:col-span-10",
+                  ? "md:col-span-7"
+                  : "md:col-span-5"
+              : aside
+                ? "md:col-span-7"
+                : "md:col-span-10",
+            framed && "flex flex-col justify-between",
           )}
         >
-          {eyebrow ? (
-            <EditorialLabel
-              number={number}
-              tone={dark || imageSide === "full" ? "cream" : "accent"}
-            >
-              {eyebrow}
-            </EditorialLabel>
-          ) : null}
-          {title}
-          {lede ? (
-            <div
-              data-hero-copy
-              className={cn(
-                editorialBody,
-                "mt-8 md:mt-10",
-                (dark || imageSide === "full") && "text-background/80",
-              )}
-            >
-              {lede}
-            </div>
-          ) : null}
+          <div>{copy}</div>
+          {framed ? metaLine : null}
         </div>
 
         {aside ? (
@@ -176,36 +204,21 @@ export function EditorialHero({
         ) : image && imageSide !== "full" ? (
           <div
             className={cn(
-              "md:col-span-5 md:h-full",
+              "h-[min(62svh,28rem)] md:h-full md:min-h-0 md:col-span-7",
               imageSide === "left" && "md:col-start-1 md:row-start-1",
             )}
           >
             <EditorialImage
               {...image}
-              ratio={image.ratio ?? "editorial"}
+              ratio={image.ratio ?? "portrait"}
               reveal="hero"
-              className={
-                image.className ??
-                "h-[min(68vh,34rem)] md:h-full md:min-h-full md:aspect-auto"
-              }
+              className={image.className ?? "h-full w-full aspect-auto"}
             />
           </div>
         ) : null}
       </div>
 
-      {meta ? (
-        <p
-          data-hero-meta
-          className={cn(
-            "relative mt-12 text-[10px] tracking-[0.22em] uppercase md:mt-16",
-            dark || imageSide === "full"
-              ? "text-background/55"
-              : "text-muted",
-          )}
-        >
-          {meta}
-        </p>
-      ) : null}
+      {!framed ? metaLine : null}
     </section>
   );
 }

@@ -15,40 +15,26 @@ export const NAV_GROUPS: NavGroup[] = [
     id: "the-house",
     label: "The House",
     items: [
-      { label: "Our Story", href: "/our-story" },
+      { label: "About Us", href: "/our-story" },
       { label: "The Founders", href: "/our-story#founders" },
       { label: "Our Philosophy", href: "/our-story#philosophy" },
-    ],
-  },
-  {
-    id: "the-journey",
-    label: "The Journey",
-    items: [
-      { label: "The Appointment", href: "/process#appointment" },
-      { label: "The Measure", href: "/process#measure" },
-      { label: "The Cloth", href: "/process#cloth" },
-      { label: "First Prova", href: "/process#first-prova" },
-      { label: "Second Prova", href: "/process#second-prova" },
-      { label: "The Delivery", href: "/process#delivery" },
     ],
   },
   {
     id: "tailoring",
     label: "Tailoring",
     items: [
-      { label: "Made to Measure", href: "/services#made-to-measure" },
-      { label: "Bespoke", href: "/services#bespoke" },
-      { label: "The Process", href: "/process" },
-      { label: "Fabrics", href: "/process#cloth" },
+      { label: "Made to Measure", href: "/services/made-to-measure" },
+      { label: "Bespoke", href: "/services/bespoke" },
     ],
   },
   {
     id: "services",
     label: "Services",
     items: [
-      { label: "Private Wardrobe", href: "/services#private-wardrobe" },
-      { label: "The Groom", href: "/services#the-groom" },
-      { label: "Personal Styling", href: "/services#personal-styling" },
+      { label: "Private Wardrobe", href: "/services/private-wardrobe" },
+      { label: "The Groom", href: "/services/the-groom" },
+      { label: "Personal Styling", href: "/services/personal-styling" },
     ],
   },
   {
@@ -72,17 +58,15 @@ export const NAV_GROUPS: NavGroup[] = [
 ];
 
 export const MENU_PRIMARY: NavLink[] = [
-  { label: "Home", href: "/" },
-  { label: "Our Story", href: "/our-story" },
-  { label: "The Journey", href: "/process" },
+  { label: "About Us", href: "/our-story" },
   { label: "Services", href: "/services" },
   { label: "The Club", href: "/club" },
   { label: "Appointments", href: "/appointments" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export const MENU_SECONDARY: NavLink[] = [
   { label: "Visit", href: "/visit" },
-  { label: "Contact", href: "/contact" },
   { label: "Privileges", href: "/club/privileges" },
   { label: "The Founders", href: "/our-story#founders" },
 ];

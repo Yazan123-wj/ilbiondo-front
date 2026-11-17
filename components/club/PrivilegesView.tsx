@@ -5,6 +5,7 @@ import { EditorialCTA } from "@/components/editorial/EditorialCTA";
 import { EditorialHero } from "@/components/editorial/EditorialHero";
 import { EditorialRule } from "@/components/editorial/EditorialRule";
 import {
+  band,
   editorialDisplay,
   editorialGutter,
 } from "@/components/editorial/styles";
@@ -17,7 +18,7 @@ export function PrivilegesView() {
     <>
       <EditorialHero
         compact
-        lines={["MORE THAN", "MEMBERSHIP."]}
+        lines={["More than", "membership."]}
         image={{
           src: MEDIA.library,
           alt: "IL BIONDO Club privileges",
@@ -28,17 +29,19 @@ export function PrivilegesView() {
         meta="PRIVILEGES / IL BIONDO"
       />
 
-      <div className={editorialGutter}>
-        {CLUB_PRIVILEGES.map((privilege, index) => (
+      {CLUB_PRIVILEGES.map((privilege, index) => (
+        <section
+          key={privilege.title}
+          className={cn(editorialGutter, band(index))}
+        >
           <PrivilegeSection
-            key={privilege.title}
             {...privilege}
             index={index}
             imageSrc={PRIVILEGE_IMAGES[index] ?? MEDIA.library}
             reverse={index % 2 === 1}
           />
-        ))}
-      </div>
+        </section>
+      ))}
 
       <section
         className={cn(

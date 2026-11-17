@@ -149,7 +149,7 @@ export function ServicesView() {
   return (
     <>
       <EditorialHero
-        lines={["AT YOUR", "SERVICE."]}
+        lines={["At your", "service."]}
         image={{
           src: MEDIA.elevator,
           alt: "IL BIONDO services",
@@ -208,11 +208,11 @@ export function ServicesView() {
                     {service.paragraphs[0]}
                   </p>
                   <EditorialCTA
-                    href={service.cta?.href ?? "/appointments"}
+                    href={`/services/${service.id}`}
                     tone="light"
                     className="mt-6 hover:text-white"
                   >
-                    {service.cta?.label ?? "Book an Appointment"}
+                    Discover
                   </EditorialCTA>
                 </div>
               </article>
@@ -234,7 +234,7 @@ export function ServicesView() {
         id="book"
         className={cn(
           editorialGutter,
-          "bg-background pb-20 pt-20 md:pb-32 md:pt-28",
+          "bg-surface pb-20 pt-20 md:pb-32 md:pt-28",
         )}
       >
         <EditorialRule className="mb-12 md:mb-16" />

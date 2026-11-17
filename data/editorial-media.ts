@@ -20,15 +20,6 @@ export const SERVICE_IMAGES = [
   MEDIA.bag,
 ] as const;
 
-export const PROCESS_IMAGES = [
-  MEDIA.library,
-  MEDIA.elevator,
-  MEDIA.oxfords,
-  MEDIA.gloves,
-  MEDIA.bag,
-  MEDIA.armchair,
-] as const;
-
 export const PRIVILEGE_IMAGES = [
   MEDIA.casino,
   MEDIA.library,

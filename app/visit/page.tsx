@@ -24,7 +24,7 @@ export default function VisitPage() {
       <EditorialHero
         number="01"
         eyebrow="THE ATELIER"
-        lines={["OUR HOME", "IN AMMAN."]}
+        lines={["Our home", "in Amman."]}
         imageSide="full"
         image={{
           src: MEDIA.hero,
@@ -45,7 +45,7 @@ export default function VisitPage() {
       <section
         className={cn(
           editorialGutter,
-          "grid gap-12 py-20 md:grid-cols-12 md:gap-8 md:py-32",
+          "grid gap-12 bg-surface py-20 md:grid-cols-12 md:gap-8 md:py-32",
         )}
       >
         <div className="md:col-span-7">
