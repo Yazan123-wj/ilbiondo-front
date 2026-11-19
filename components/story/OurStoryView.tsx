@@ -6,6 +6,7 @@ import { EditorialLabel } from "@/components/editorial/EditorialLabel";
 import {
   band,
   editorialBody,
+  editorialBodyLight,
   editorialDisplay,
   editorialGutter,
 } from "@/components/editorial/styles";
@@ -38,6 +39,22 @@ const STORY_BEATS = [
       "Today, our atelier in Amman continues the same philosophy: personal service, considered design and tailoring created around the individual.",
     ],
   },
+  {
+    label: "The individual",
+    image: MEDIA.oxfords,
+    alt: "Tailoring around the individual",
+    copy: [
+      "The best tailoring starts by knowing the person who will wear it.",
+    ],
+  },
+  {
+    label: "Made for one",
+    image: MEDIA.gloves,
+    alt: "A garment made for one",
+    copy: [
+      "IL BIONDO is the atelier where a garment is cut, fitted and finished around one person. Cloth, proportion and detail are chosen with you — then made by hand until the suit is yours.",
+    ],
+  },
 ] as const;
 
 function StoryBeat({
@@ -46,12 +63,14 @@ function StoryBeat({
   alt,
   copy,
   reverse,
+  accent,
 }: {
   label: string;
   image: string;
   alt: string;
   copy: readonly string[];
   reverse?: boolean;
+  accent?: boolean;
 }) {
   return (
     <article className="grid items-center gap-8 py-12 md:grid-cols-12 md:gap-10 md:py-16">
@@ -75,10 +94,20 @@ function StoryBeat({
           reverse ? "md:col-start-1 md:row-start-1" : "md:col-start-8",
         )}
       >
-        <p className="text-[11px] tracking-[0.22em] text-accent uppercase">
+        <p
+          className={cn(
+            "text-[11px] tracking-[0.22em] uppercase",
+            accent ? "text-background/70" : "text-accent",
+          )}
+        >
           {label}
         </p>
-        <div className={cn(editorialBody, "mt-5 space-y-5")}>
+        <div
+          className={cn(
+            accent ? editorialBodyLight : editorialBody,
+            "mt-5 space-y-5",
+          )}
+        >
           {copy.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -101,17 +130,24 @@ export function OurStoryView() {
           label: "ATELIER IMAGE",
           ratio: "portrait",
         }}
-        meta="THE HOUSE / IL BIONDO"
       />
 
-      {STORY_BEATS.map((beat, index) => (
-        <section
-          key={beat.label}
-          className={cn(editorialGutter, band(index), "py-8 md:py-4")}
-        >
-          <StoryBeat {...beat} reverse={index % 2 === 1} />
-        </section>
-      ))}
+      {STORY_BEATS.map((beat, index) => {
+        const accent =
+          beat.label === "The house" || beat.label === "Made for one";
+        return (
+          <section
+            key={beat.label}
+            className={cn(
+              editorialGutter,
+              accent ? "bg-accent text-background" : band(index),
+              "py-8 md:py-4",
+            )}
+          >
+            <StoryBeat {...beat} reverse={index % 2 === 1} accent={accent} />
+          </section>
+        );
+      })}
 
       <section
         id="founders"
@@ -122,9 +158,9 @@ export function OurStoryView() {
         )}
       >
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-          <EditorialLabel number="02">THE FOUNDERS</EditorialLabel>
+          <EditorialLabel number="02">THE FOUNDER</EditorialLabel>
           <SplitText
-            text="The founders"
+            text="The founder"
             tag="h2"
             className={cn(
               editorialDisplay,
@@ -228,8 +264,8 @@ export function OurStoryView() {
           </p>
           <div
             className={cn(
-              editorialBody,
-              "space-y-4 md:col-span-5 md:col-start-8",
+            editorialBody,
+            "space-y-4 md:col-span-5 md:col-start-8",
             )}
           >
             <p>Understanding proportion.</p>

@@ -60,7 +60,7 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="flex h-full flex-col justify-end border-t border-border pt-8">
+      <div className="border-t border-border pt-8">
         <p className="font-serif text-3xl tracking-tight">
           Your message is ready to be sent.
         </p>
@@ -75,10 +75,10 @@ export function ContactForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex flex-col gap-5 md:h-full md:justify-between md:gap-4"
+      className="flex flex-col gap-7"
       noValidate
     >
-      <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
+      <div className="grid gap-x-8 gap-y-7 md:grid-cols-2">
         <TextField
           id="contact-name"
           label="Full name"
@@ -135,8 +135,8 @@ export function ContactForm() {
       <TextareaField
         id="contact-message"
         label="Message"
-        rows={2}
-        className="mt-2 min-h-16 py-2 text-base md:min-h-20 md:text-lg"
+        rows={5}
+        className="mt-2 min-h-28 py-2 text-base md:min-h-32 md:text-lg"
         value={values.message}
         error={errors.message}
         onChange={(event) =>

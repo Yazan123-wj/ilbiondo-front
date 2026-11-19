@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { MenuOverlay } from "@/components/layout/MenuOverlay";
-import { BrandMark } from "@/components/shared/BrandMark";
 import { DualToneWordmark } from "@/components/shared/DualToneWordmark";
 import { cn } from "@/lib/utils";
 
@@ -42,7 +41,7 @@ export function SiteNav({
     }
 
     const update = () => {
-      setInternalScrolled(window.scrollY > window.innerHeight * 0.55);
+      setInternalScrolled(window.scrollY > window.innerHeight * 0.88);
     };
 
     update();
@@ -101,23 +100,11 @@ export function SiteNav({
               data-nav-logo
               className="pointer-events-none absolute inset-0 flex items-center justify-center"
             >
-              {logoRef ? (
-                <DualToneWordmark
-                  ref={logoRef}
-                  onMedia={!ivory}
-                  className="relative pointer-events-auto h-12 md:h-16"
-                />
-              ) : (
-                <Link
-                  href="/"
-                  className={cn(
-                    "pointer-events-auto h-12 md:h-16",
-                    light ? "text-background" : "text-accent",
-                  )}
-                >
-                  <BrandMark />
-                </Link>
-              )}
+              <DualToneWordmark
+                ref={logoRef}
+                onMedia={!ivory}
+                className="relative pointer-events-auto h-12 md:h-16"
+              />
             </div>
           ) : null}
         </div>

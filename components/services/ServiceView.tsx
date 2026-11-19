@@ -4,7 +4,7 @@ import { EditorialHero } from "@/components/editorial/EditorialHero";
 import { EditorialRule } from "@/components/editorial/EditorialRule";
 import {
   band,
-  editorialBody,
+  editorialBodyLight,
   editorialDisplay,
   editorialGutter,
 } from "@/components/editorial/styles";
@@ -62,7 +62,6 @@ export function ServiceView({ service }: ServiceViewProps) {
             ))}
           </div>
         }
-        meta={`${service.label.toUpperCase()} / IL BIONDO`}
       />
 
       <section className={cn(editorialGutter, band(0), "pt-16 pb-8 md:pt-20 md:pb-10")}>
@@ -77,6 +76,25 @@ export function ServiceView({ service }: ServiceViewProps) {
         >
           How it unfolds.
         </h2>
+        <nav aria-label="Journey" className="mt-10 md:mt-12">
+          <ol className="grid grid-cols-2 gap-x-8 gap-y-4 md:grid-cols-3 lg:grid-cols-6">
+            {steps.map((step) => (
+              <li key={step.id}>
+                <a
+                  href={`#${step.id}`}
+                  className="group flex flex-col gap-2 border-t border-border pt-4 transition-colors hover:border-accent"
+                >
+                  <span className="font-serif text-sm tracking-[0.12em] text-accent">
+                    {step.number}
+                  </span>
+                  <span className="font-serif text-[1.05rem] leading-snug tracking-tight text-foreground transition-colors group-hover:text-accent md:text-lg">
+                    {step.label}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
       </section>
 
       {steps.map((step, stepIndex) => (
@@ -98,10 +116,10 @@ export function ServiceView({ service }: ServiceViewProps) {
       <section
         className={cn(
           editorialGutter,
-          "bg-background pb-20 pt-4 md:pb-32 md:pt-8",
+          "bg-accent pb-20 pt-20 text-background md:pb-32 md:pt-28",
         )}
       >
-        <EditorialRule className="mb-12 md:mb-16" />
+        <EditorialRule tone="cream" className="mb-12 md:mb-16" />
         <h2
           className={cn(
             editorialDisplay,
@@ -110,10 +128,10 @@ export function ServiceView({ service }: ServiceViewProps) {
         >
           Make an appointment.
         </h2>
-        <p className={cn(editorialBody, "mt-8")}>
+        <p className={cn(editorialBodyLight, "mt-8")}>
           Every IL BIONDO journey begins with a conversation.
         </p>
-        <EditorialCTA href={bookHref} className="mt-10">
+        <EditorialCTA href={bookHref} tone="fill" className="mt-10">
           {bookLabel}
         </EditorialCTA>
       </section>

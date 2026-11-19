@@ -16,7 +16,7 @@ export const NAV_GROUPS: NavGroup[] = [
     label: "The House",
     items: [
       { label: "About Us", href: "/our-story" },
-      { label: "The Founders", href: "/our-story#founders" },
+      { label: "The Founder", href: "/our-story#founders" },
       { label: "Our Philosophy", href: "/our-story#philosophy" },
     ],
   },
@@ -68,5 +68,5 @@ export const MENU_PRIMARY: NavLink[] = [
 export const MENU_SECONDARY: NavLink[] = [
   { label: "Visit", href: "/visit" },
   { label: "Privileges", href: "/club/privileges" },
-  { label: "The Founders", href: "/our-story#founders" },
+  { label: "The Founder", href: "/our-story#founders" },
 ];

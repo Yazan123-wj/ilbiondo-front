@@ -6,7 +6,7 @@ import { EditorialCTA } from "@/components/editorial/EditorialCTA";
 import { EditorialHero } from "@/components/editorial/EditorialHero";
 import { EditorialRule } from "@/components/editorial/EditorialRule";
 import {
-  editorialBody,
+  editorialBodyLight,
   editorialDisplay,
   editorialGutter,
 } from "@/components/editorial/styles";
@@ -36,7 +36,6 @@ export function AppointmentsView() {
             </p>
           </>
         }
-        meta="APPOINTMENTS / IL BIONDO"
       />
 
       <section
@@ -81,10 +80,10 @@ export function AppointmentsView() {
       <section
         className={cn(
           editorialGutter,
-          "bg-background pb-20 pt-4 md:pb-32 md:pt-8",
+          "bg-accent pb-20 pt-20 text-background md:pb-32 md:pt-28",
         )}
       >
-        <EditorialRule className="mb-12 md:mb-16" />
+        <EditorialRule tone="cream" className="mb-12 md:mb-16" />
         <h2
           className={cn(
             editorialDisplay,
@@ -94,12 +93,12 @@ export function AppointmentsView() {
           Your journey begins with a private appointment at the IL BIONDO
           atelier.
         </h2>
-        <p className={cn(editorialBody, "mt-8")}>
+        <p className={cn(editorialBodyLight, "mt-8")}>
           {CONTACT.atelierName}
           <br />
           {CONTACT.addressLine1}, {CONTACT.addressLine2}
         </p>
-        <EditorialCTA href="/visit" className="mt-10">
+        <EditorialCTA href="/visit" tone="fill" className="mt-10">
           Visit the Atelier
         </EditorialCTA>
       </section>

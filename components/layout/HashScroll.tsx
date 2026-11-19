@@ -14,12 +14,15 @@ function scrollToHash(hash: string) {
     return false;
   }
 
+  const header = document.querySelector("header");
+  const offset = (header?.getBoundingClientRect().height ?? 96) + 20;
+  const top = node.getBoundingClientRect().top + window.scrollY - offset;
   const reduce = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
 
-  node.scrollIntoView({
-    block: "start",
+  window.scrollTo({
+    top: Math.max(0, top),
     behavior: reduce ? "auto" : "smooth",
   });
   return true;
@@ -57,8 +60,33 @@ export function HashScroll() {
       scrollToHash(window.location.hash);
     };
 
+    const onClick = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) {
+        return;
+      }
+
+      const link = target.closest("a[href^='#']");
+      if (!(link instanceof HTMLAnchorElement)) {
+        return;
+      }
+
+      const href = link.getAttribute("href");
+      if (!href || href === "#") {
+        return;
+      }
+
+      event.preventDefault();
+      window.history.pushState(null, "", href);
+      scrollToHash(href);
+    };
+
     window.addEventListener("hashchange", onHashChange);
-    return () => window.removeEventListener("hashchange", onHashChange);
+    document.addEventListener("click", onClick);
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+      document.removeEventListener("click", onClick);
+    };
   }, []);
 
   return null;

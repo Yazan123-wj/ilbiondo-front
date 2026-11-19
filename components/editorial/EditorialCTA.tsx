@@ -6,7 +6,7 @@ type EditorialCTAProps = {
   href: string;
   children: string;
   className?: string;
-  tone?: "dark" | "light";
+  tone?: "dark" | "light" | "fill";
 };
 
 export function EditorialCTA({
@@ -17,7 +17,11 @@ export function EditorialCTA({
 }: EditorialCTAProps) {
   const classNames = cn(
     "group inline-flex w-fit items-center gap-3 text-[11px] tracking-[0.2em] uppercase transition-colors duration-300",
-    tone === "dark" ? "text-foreground hover:text-accent" : "text-background",
+    tone === "fill"
+      ? "bg-background px-8 py-3.5 text-accent hover:opacity-85"
+      : tone === "light"
+        ? "text-background"
+        : "text-foreground hover:text-accent",
     className,
   );
 

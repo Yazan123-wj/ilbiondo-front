@@ -9,3 +9,6 @@ export const editorialDisplay =
 
 export const editorialBody =
   "max-w-[34rem] font-sans text-base leading-8 text-muted md:text-lg md:leading-9";
+
+export const editorialBodyLight =
+  "max-w-[34rem] font-sans text-base leading-8 text-background/90 md:text-lg md:leading-9";

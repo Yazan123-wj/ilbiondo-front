@@ -7,6 +7,7 @@ import { CurtainLine } from "@/components/home/CurtainLine";
 import { EditorialLabel } from "@/components/editorial/EditorialLabel";
 import {
   editorialBody,
+  editorialBodyLight,
   editorialDisplay,
   editorialGutter,
 } from "@/components/editorial/styles";
@@ -18,7 +19,6 @@ type EditorialHeroProps = {
   eyebrow?: string;
   lines: string[];
   lede?: ReactNode;
-  meta?: string;
   image?: {
     src?: string;
     alt: string;
@@ -39,7 +39,6 @@ export function EditorialHero({
   eyebrow,
   lines,
   lede,
-  meta,
   image,
   aside,
   imageSide = "full",
@@ -67,10 +66,9 @@ export function EditorialHero({
         root,
       );
       const copy = root.querySelector("[data-hero-copy]");
-      const metaEl = root.querySelector("[data-hero-meta]");
 
       if (reduce) {
-        gsap.set([label, copy, metaEl].filter(Boolean), { autoAlpha: 1, y: 0 });
+        gsap.set([label, copy].filter(Boolean), { autoAlpha: 1, y: 0 });
         gsap.set(linesEl, { yPercent: 0 });
         return;
       }
@@ -78,13 +76,11 @@ export function EditorialHero({
       if (label) gsap.set(label, { autoAlpha: 0, y: 10 });
       gsap.set(linesEl, { yPercent: 105 });
       if (copy) gsap.set(copy, { autoAlpha: 0, y: 14 });
-      if (metaEl) gsap.set(metaEl, { autoAlpha: 0 });
 
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
       tl.to(label, { autoAlpha: 1, y: 0, duration: 0.4 }, 0);
       tl.to(linesEl, { yPercent: 0, duration: 0.88, stagger: 0.1 }, 0.12);
       tl.to(copy, { autoAlpha: 1, y: 0, duration: 0.5 }, 0.55);
-      tl.to(metaEl, { autoAlpha: 1, duration: 0.4 }, 0.72);
     },
     { scope: ref },
   );
@@ -160,24 +156,12 @@ export function EditorialHero({
             <div
               data-hero-copy
               className={cn(
-                editorialBody,
+                onPhoto ? editorialBodyLight : editorialBody,
                 "mt-6 max-w-md md:mt-8",
-                onPhoto && "text-background/80",
               )}
             >
               {lede}
             </div>
-          ) : null}
-          {meta ? (
-            <p
-              data-hero-meta
-              className={cn(
-                "mt-8 text-[10px] tracking-[0.22em] uppercase md:mt-10",
-                onPhoto ? "text-background/55" : "text-muted",
-              )}
-            >
-              {meta}
-            </p>
           ) : null}
         </div>
 

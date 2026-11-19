@@ -26,11 +26,11 @@ export function PrivilegeSection({
   reverse = false,
 }: PrivilegeSectionProps) {
   return (
-    <article
-      id={id}
-      className="scroll-mt-24 py-16 md:scroll-mt-28 md:py-24"
-    >
-      <div className="grid items-center gap-10 md:grid-cols-12 md:gap-10">
+    <article className="py-16 md:py-24">
+      <div
+        id={id}
+        className="grid scroll-mt-28 items-center gap-10 md:grid-cols-12 md:gap-10"
+      >
         <div
           className={cn(
             "md:col-span-6",

@@ -8,7 +8,6 @@ import { ExperienceSection } from "@/components/club/ExperienceSection";
 import { MembershipSection } from "@/components/club/MembershipSection";
 import { EditorialCTA } from "@/components/editorial/EditorialCTA";
 import { EditorialHero } from "@/components/editorial/EditorialHero";
-import { EditorialRule } from "@/components/editorial/EditorialRule";
 import {
   editorialDisplay,
   editorialGutter,
@@ -97,8 +96,10 @@ export function ClubView() {
         <EditorialCTA href="/club/privileges" className="mt-10">
           Discover the Privileges
         </EditorialCTA>
+      </section>
 
-        <div className="mt-14 grid grid-cols-3 gap-2 md:mt-20 md:gap-4">
+      <section className={cn(editorialGutter, "bg-accent py-10 md:py-16")}>
+        <div className="grid grid-cols-3 gap-2 md:gap-4">
           <EditorialImage
             src={PRIVILEGE_IMAGES[0]}
             alt="First to Know"
@@ -128,10 +129,9 @@ export function ClubView() {
       <section
         className={cn(
           editorialGutter,
-          "bg-background pb-20 pt-4 md:pb-32 md:pt-8",
+          "bg-accent pb-20 pt-20 text-background md:pb-32 md:pt-28",
         )}
       >
-        <EditorialRule className="mb-12 md:mb-16" />
         <h2
           className={cn(
             editorialDisplay,
@@ -142,7 +142,7 @@ export function ClubView() {
           <br />
           begins with a conversation.
         </h2>
-        <EditorialCTA href="/appointments" className="mt-10">
+        <EditorialCTA href="/appointments" tone="fill" className="mt-10">
           Book an Appointment
         </EditorialCTA>
       </section>

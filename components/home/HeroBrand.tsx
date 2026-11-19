@@ -35,20 +35,20 @@ export function HeroBrand() {
 
       const intro = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
-      intro.to(logo, { autoAlpha: 1, duration: 0.55, ease: "power2.out" });
-      intro.to(logo, { autoAlpha: 0, duration: 0.7 }, "+=1");
+      intro.to(logo, { autoAlpha: 1, duration: 0.35, ease: "power2.out" });
+      intro.to(logo, { autoAlpha: 0, duration: 0.4 }, "+=0.7");
       intro.fromTo(
         lineOne,
-        { autoAlpha: 0, y: 10 },
-        { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" },
-        "<0.22",
+        { autoAlpha: 0, y: 8 },
+        { autoAlpha: 1, y: 0, duration: 0.28, ease: "power2.out" },
+        "<0.08",
       );
-      intro.to(lineOne, { autoAlpha: 0, y: -8, duration: 0.7 }, "+=3");
+      intro.to(lineOne, { autoAlpha: 0, y: -6, duration: 0.28 }, "+=0.75");
       intro.fromTo(
         lineTwo,
-        { autoAlpha: 0, y: 10 },
-        { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" },
-        "<0.22",
+        { autoAlpha: 0, y: 8 },
+        { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" },
+        "<0.12",
       );
     },
     { scope: wrapRef },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { AboutSection } from "@/components/home/AboutSection";
-import { BrandAtelier } from "@/components/home/BrandAtelier";
+import { HomeGallery } from "@/components/home/HomeGallery";
 import { FeaturedBrands } from "@/components/home/FeaturedBrands";
 import { HomeIntro } from "@/components/home/HomeIntro";
 
@@ -19,7 +19,7 @@ export default function HomePage() {
       <HomeIntro />
       <FeaturedBrands />
       <AboutSection />
-      <BrandAtelier />
+      <HomeGallery />
     </>
   );
 }

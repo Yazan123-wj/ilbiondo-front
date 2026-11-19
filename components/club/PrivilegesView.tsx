@@ -26,7 +26,6 @@ export function PrivilegesView() {
           ratio: "editorial",
         }}
         lede={<p>A closer relationship with the house.</p>}
-        meta="PRIVILEGES / IL BIONDO"
       />
 
       {CLUB_PRIVILEGES.map((privilege, index) => (
@@ -46,10 +45,10 @@ export function PrivilegesView() {
       <section
         className={cn(
           editorialGutter,
-          "bg-background pb-20 pt-4 md:pb-32 md:pt-8",
+          "bg-accent pb-20 pt-20 text-background md:pb-32 md:pt-28",
         )}
       >
-        <EditorialRule className="mb-12 md:mb-16" />
+        <EditorialRule tone="cream" className="mb-12 md:mb-16" />
         <h2
           className={cn(
             editorialDisplay,
@@ -58,7 +57,7 @@ export function PrivilegesView() {
         >
           The art of belonging.
         </h2>
-        <EditorialCTA href="/club#membership" className="mt-10">
+        <EditorialCTA href="/club#membership" tone="fill" className="mt-10">
           Join IL BIONDO Club
         </EditorialCTA>
       </section>

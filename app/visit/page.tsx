@@ -4,7 +4,7 @@ import { EditorialCTA } from "@/components/editorial/EditorialCTA";
 import { EditorialHero } from "@/components/editorial/EditorialHero";
 import { EditorialRule } from "@/components/editorial/EditorialRule";
 import {
-  editorialBody,
+  editorialBodyLight,
   editorialGutter,
 } from "@/components/editorial/styles";
 import { EditorialImage } from "@/components/shared/EditorialImage";
@@ -39,13 +39,12 @@ export default function VisitPage() {
             experience tailoring privately.
           </p>
         }
-        meta="AMMAN, JORDAN / IL BIONDO"
       />
 
       <section
         className={cn(
           editorialGutter,
-          "grid gap-12 bg-surface py-20 md:grid-cols-12 md:gap-8 md:py-32",
+          "grid gap-12 bg-accent py-20 text-background md:grid-cols-12 md:gap-8 md:py-32",
         )}
       >
         <div className="md:col-span-7">
@@ -58,7 +57,7 @@ export default function VisitPage() {
           />
         </div>
         <div className="md:col-span-4 md:col-start-9">
-          <p className="text-[11px] tracking-[0.22em] text-accent uppercase">
+          <p className="text-[11px] tracking-[0.22em] text-background/70 uppercase">
             {CONTACT.atelierName}
           </p>
           <p className="mt-6 font-serif text-[clamp(1.6rem,3vw,2.4rem)] leading-[1.15]">
@@ -67,13 +66,13 @@ export default function VisitPage() {
             {CONTACT.addressLine2}
           </p>
           <EditorialRule className="my-10" />
-          <p className="text-[11px] tracking-[0.22em] text-muted uppercase">
+          <p className="text-[11px] tracking-[0.22em] text-background/55 uppercase">
             Opening Hours
           </p>
-          <dl className={cn(editorialBody, "mt-6 space-y-4")}>
+          <dl className={cn(editorialBodyLight, "mt-6 space-y-4")}>
             {CONTACT.hours.map((entry) => (
               <div key={entry.days}>
-                <dt className="font-serif text-foreground">{entry.days}</dt>
+                <dt className="font-serif text-background">{entry.days}</dt>
                 <dd>{entry.time}</dd>
               </div>
             ))}
@@ -84,16 +83,16 @@ export default function VisitPage() {
                 href={CONTACT.mapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="text-[11px] tracking-[0.2em] uppercase transition-colors hover:text-accent"
+                className="text-[11px] tracking-[0.2em] uppercase text-background/80 transition-opacity hover:opacity-100"
               >
                 Get Directions
               </a>
             ) : (
-              <span className="text-[11px] tracking-[0.2em] text-muted uppercase">
+              <span className="text-[11px] tracking-[0.2em] text-background/50 uppercase">
                 Get Directions
               </span>
             )}
-            <EditorialCTA href="/appointments">Book an Appointment</EditorialCTA>
+            <EditorialCTA href="/appointments" tone="fill">Book an Appointment</EditorialCTA>
           </div>
         </div>
       </section>
