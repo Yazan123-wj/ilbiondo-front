@@ -10,6 +10,31 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/services/made-to-measure",
+        destination: "/services/su-misura",
+        permanent: true,
+      },
+      {
+        source: "/services/bespoke",
+        destination: "/services/su-misura",
+        permanent: true,
+      },
+      {
+        source: "/services/personal-styling",
+        destination: "/services/consulting",
+        permanent: true,
+      },
+      {
+        source: "/services/private-wardrobe",
+        destination: "/services/wardrobe-management",
+        permanent: true,
+      },
+      {
+        source: "/services/club-tailoring",
+        destination: "/services/garment-refinement",
+        permanent: true,
+      },
     ];
   },
 };

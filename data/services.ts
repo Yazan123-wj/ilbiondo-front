@@ -1,8 +1,17 @@
-export type ServiceBlock = {
+export type ServiceSub = {
   id: string;
   label: string;
   title: string;
   paragraphs: string[];
+};
+
+export type ServiceBlock = {
+  id: string;
+  label: string;
+  title: string;
+  lines: string[];
+  paragraphs: string[];
+  subServices?: ServiceSub[];
   journey: readonly string[];
   cta?: {
     label: string;
@@ -10,104 +19,109 @@ export type ServiceBlock = {
   };
 };
 
-const TAILORING_JOURNEY = [
-  "appointment",
-  "measure",
-  "cloth",
-  "first-prova",
-  "second-prova",
-  "delivery",
+const SU_MISURA_JOURNEY = [
+  "consultation",
+  "garment-selection",
+  "personalization",
+  "craftsmanship",
 ] as const;
 
 export const SERVICES: ServiceBlock[] = [
   {
-    id: "made-to-measure",
-    label: "Made to Measure",
-    title: "Made around you.",
+    id: "su-misura",
+    label: "Su Misura",
+    title: "Made for You.",
+    lines: ["Made for", "you."],
     paragraphs: [
-      "A personalised approach to tailoring combining established patterns with your individual measurements, fabric selection and preferred details.",
-      "Choose from our collection of fine fabrics and work with our team to define the cut, proportions and finishing of your garment.",
+      "At IL BIONDO, every garment begins with precise measurements, an understanding of your body, and a personal selection of fabrics and details. Our Su Misura experience offers two approaches to tailoring.",
     ],
-    journey: TAILORING_JOURNEY,
-    cta: {
-      label: "Book Made to Measure",
-      href: "/appointments",
-    },
-  },
-  {
-    id: "bespoke",
-    label: "Bespoke",
-    title: "Created from the beginning.",
-    paragraphs: [
-      "Our most personal expression of tailoring.",
-      "A bespoke garment is developed specifically for you through individual measurements, fittings and adjustments, allowing the garment to evolve around your proportions, posture and preferences.",
-      "The process is deliberate.",
-      "The result is entirely personal.",
+    subServices: [
+      {
+        id: "made-to-measure",
+        label: "Made to Measure",
+        title: "Modern Precision",
+        paragraphs: [
+          "A personalized tailoring experience that combines precise measurements, individual style, and modern construction techniques. Designed to deliver an elegant fit, comfort, and practicality for everyday wear.",
+        ],
+      },
+      {
+        id: "bespoke",
+        label: "Bespoke",
+        title: "The Art of Craftsmanship",
+        paragraphs: [
+          "A more traditional approach to tailoring, where craftsmanship takes center stage. Featuring handwork, refined construction, and meticulous attention to every detail, creating a garment with exceptional character and a truly personal finish.",
+        ],
+      },
     ],
-    journey: TAILORING_JOURNEY,
+    journey: SU_MISURA_JOURNEY,
     cta: {
-      label: "Book a Bespoke Consultation",
-      href: "/appointments",
-    },
-  },
-  {
-    id: "club-tailoring",
-    label: "Club Tailoring",
-    title: "Care for your wardrobe.",
-    paragraphs: [
-      "Exclusively for IL BIONDO Club members.",
-      "Our tailoring team can alter and refine selected garments from your existing wardrobe, helping improve proportion, fit and balance.",
-    ],
-    journey: ["appointment", "measure", "first-prova", "delivery"],
-    cta: {
-      label: "Member Sign In",
-      href: "/club",
-    },
-  },
-  {
-    id: "private-wardrobe",
-    label: "Private Wardrobe",
-    title: "A wardrobe with purpose.",
-    paragraphs: [
-      "A well-built wardrobe is not about having more.",
-      "It is about having what works.",
-      "Our Private Wardrobe service helps organise and refine your dressing room — reviewing existing pieces, identifying what is missing and creating a wardrobe that works naturally across business, travel, formal occasions and everyday life.",
-    ],
-    journey: ["appointment", "cloth", "delivery"],
-    cta: {
-      label: "Book a Wardrobe Consultation",
+      label: "Book Su Misura",
       href: "/appointments",
     },
   },
   {
     id: "the-groom",
     label: "The Groom",
-    title: "For the day that matters.",
+    title: "Every Detail, Considered.",
+    lines: ["Every detail,", "considered."],
     paragraphs: [
-      "From the first fitting to the final moments before the ceremony.",
-      "IL BIONDO offers a dedicated groom service covering the complete wedding wardrobe, fittings, finishing details and personal dressing assistance on the wedding day.",
-      "So when the moment arrives, everything is exactly where it should be.",
+      "A personal dressing experience dedicated to the groom on his most memorable day.",
+      "From preparing his wardrobe and personal essentials to coordinating every accessory, IL BIONDO takes care of every detail.",
+      "Our team personally attends to the groom, ensuring each look, from the first appearance to the final celebration, is impeccably presented.",
+      "So he can simply enjoy the moment, while we take care of the rest.",
     ],
-    journey: TAILORING_JOURNEY,
+    journey: [],
     cta: {
       label: "Book a Groom Consultation",
       href: "/appointments",
     },
   },
   {
-    id: "personal-styling",
-    label: "Personal Styling & Shopping",
-    title: "Beyond IL BIONDO.",
+    id: "consulting",
+    label: "Consulting",
+    title: "Style Beyond Tailoring.",
+    lines: ["Style beyond", "tailoring."],
     paragraphs: [
-      "Exclusively for IL BIONDO Club members.",
-      "Our approach to personal style does not end at our atelier.",
-      "When a wardrobe requires pieces outside the IL BIONDO collection, our team can assist members in selecting and sourcing garments, footwear and accessories from other houses.",
-      "Every choice is considered as part of one wardrobe.",
+      "A personalized styling experience that extends beyond the IL BIONDO wardrobe.",
+      "We carefully curate clothing, footwear, and accessories from international luxury brands, creating a wardrobe that reflects each client's personality, lifestyle, and individual taste.",
+      "A considered approach to personal style, where every choice feels distinctly yours.",
     ],
-    journey: ["appointment", "cloth", "delivery"],
+    journey: [],
     cta: {
-      label: "Discover IL BIONDO Club",
-      href: "/club",
+      label: "Book a Consulting Appointment",
+      href: "/appointments",
+    },
+  },
+  {
+    id: "wardrobe-management",
+    label: "Wardrobe Management",
+    title: "An Organized Expression of Your Style.",
+    lines: ["An organized", "expression of", "your style."],
+    paragraphs: [
+      "A personalized approach to organizing and refining your dressing room.",
+      "From coordinating outfits and arranging colors to separating formal and casual wardrobes, every detail is thoughtfully considered around your lifestyle and daily routine.",
+      "Creating a wardrobe where elegance meets practicality, and every piece has its place.",
+    ],
+    journey: [],
+    cta: {
+      label: "Book a Wardrobe Consultation",
+      href: "/appointments",
+    },
+  },
+  {
+    id: "garment-refinement",
+    label: "Garment Refinement",
+    title: "The Perfect Fit, Reconsidered.",
+    lines: ["The perfect fit,", "reconsidered."],
+    paragraphs: [
+      "A dedicated alteration service designed to refine the fit and comfort of your existing wardrobe.",
+      "From subtle adjustments to more extensive alterations, we carefully reshape and refine garments to complement your proportions and personal style.",
+      "Whether an IL BIONDO creation or a piece from your own collection, every garment receives the attention it deserves.",
+    ],
+    journey: [],
+    cta: {
+      label: "Book Garment Refinement",
+      href: "/appointments",
     },
   },
 ];

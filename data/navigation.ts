@@ -23,18 +23,16 @@ export const NAV_GROUPS: NavGroup[] = [
   {
     id: "tailoring",
     label: "Tailoring",
-    items: [
-      { label: "Made to Measure", href: "/services/made-to-measure" },
-      { label: "Bespoke", href: "/services/bespoke" },
-    ],
+    items: [{ label: "Su Misura", href: "/services/su-misura" }],
   },
   {
     id: "services",
     label: "Services",
     items: [
-      { label: "Private Wardrobe", href: "/services/private-wardrobe" },
       { label: "The Groom", href: "/services/the-groom" },
-      { label: "Personal Styling", href: "/services/personal-styling" },
+      { label: "Consulting", href: "/services/consulting" },
+      { label: "Wardrobe Management", href: "/services/wardrobe-management" },
+      { label: "Garment Refinement", href: "/services/garment-refinement" },
     ],
   },
   {

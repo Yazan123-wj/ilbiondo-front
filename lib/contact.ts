@@ -18,11 +18,11 @@ export const CONTACT = {
 } as const;
 
 export const APPOINTMENT_SERVICES = [
-  "Made to Measure",
-  "Bespoke",
-  "Wedding Consultation",
-  "Styling Consultation",
-  "Fitting",
+  "Su Misura",
+  "The Groom",
+  "Consulting",
+  "Wardrobe Management",
+  "Garment Refinement",
   "Other",
 ] as const;
 
