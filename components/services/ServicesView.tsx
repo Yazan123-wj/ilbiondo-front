@@ -70,7 +70,7 @@ export function ServicesView() {
                 <h2 className="font-serif text-3xl leading-none tracking-tight text-white md:text-5xl">
                   {service.label}
                 </h2>
-                <p className="mt-4 max-w-xs text-sm leading-6 text-white/80 line-clamp-3 md:max-w-sm md:text-[15px] md:leading-7">
+                <p className="mt-4 max-w-lg text-sm leading-6 text-white/80 md:text-[15px] md:leading-7">
                   {service.paragraphs[0]}
                 </p>
                 <EditorialCTA

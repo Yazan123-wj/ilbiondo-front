@@ -15,7 +15,11 @@ function scrollToHash(hash: string) {
   }
 
   const header = document.querySelector("header");
-  const offset = (header?.getBoundingClientRect().height ?? 96) + 20;
+  const subnav = document.querySelector("[data-journey-nav]");
+  const offset =
+    (header?.getBoundingClientRect().height ?? 96) +
+    (subnav?.getBoundingClientRect().height ?? 0) +
+    20;
   const top = node.getBoundingClientRect().top + window.scrollY - offset;
   const reduce = window.matchMedia(
     "(prefers-reduced-motion: reduce)",

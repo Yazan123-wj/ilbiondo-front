@@ -29,7 +29,7 @@ export function PrivilegeSection({
     <article className="py-16 md:py-24">
       <div
         id={id}
-        className="grid scroll-mt-28 items-center gap-10 md:grid-cols-12 md:gap-10"
+        className="grid scroll-mt-44 items-center gap-10 md:grid-cols-12 md:gap-10 md:scroll-mt-48"
       >
         <div
           className={cn(

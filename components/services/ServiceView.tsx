@@ -1,5 +1,6 @@
 import { PrivilegeSection } from "@/components/club/PrivilegeSection";
 import { EditorialCTA } from "@/components/editorial/EditorialCTA";
+import { ProcessNav } from "@/components/services/ProcessNav";
 import { EditorialHero } from "@/components/editorial/EditorialHero";
 import { EditorialRule } from "@/components/editorial/EditorialRule";
 import {
@@ -156,45 +157,29 @@ export function ServiceView({ service }: ServiceViewProps) {
             >
               From the first conversation to the final fitting.
             </h2>
-            <nav aria-label="The Experience" className="mt-10 md:mt-12">
-              <ol className="grid grid-cols-2 gap-x-8 gap-y-4 md:grid-cols-4">
-                {steps.map((step) => (
-                  <li key={step.id}>
-                    <a
-                      href={`#${step.id}`}
-                      className="group flex flex-col gap-2 border-t border-border pt-4 transition-colors hover:border-accent"
-                    >
-                      <span className="font-serif text-sm tracking-[0.12em] text-accent">
-                        {step.number}
-                      </span>
-                      <span className="font-serif text-[1.05rem] leading-snug tracking-tight text-foreground transition-colors group-hover:text-accent md:text-lg">
-                        {step.label}
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </nav>
           </section>
 
-          {steps.map((step, stepIndex) => (
-            <section
-              key={step.id}
-              className={cn(
-                editorialGutter,
-                band(journeyBand + 1 + stepIndex),
-              )}
-            >
-              <PrivilegeSection
-                id={step.id}
-                title={step.title}
-                paragraphs={step.paragraphs}
-                index={stepIndex}
-                imageSrc={JOURNEY_IMAGES[stepIndex] ?? MEDIA.library}
-                reverse={stepIndex % 2 === 1}
-              />
-            </section>
-          ))}
+          <div>
+            <ProcessNav steps={steps} />
+            {steps.map((step, stepIndex) => (
+              <section
+                key={step.id}
+                className={cn(
+                  editorialGutter,
+                  band(journeyBand + 1 + stepIndex),
+                )}
+              >
+                <PrivilegeSection
+                  id={step.id}
+                  title={step.title}
+                  paragraphs={step.paragraphs}
+                  index={stepIndex}
+                  imageSrc={JOURNEY_IMAGES[stepIndex] ?? MEDIA.library}
+                  reverse={stepIndex % 2 === 1}
+                />
+              </section>
+            ))}
+          </div>
         </>
       ) : null}
 
